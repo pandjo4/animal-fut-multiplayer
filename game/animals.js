@@ -5,7 +5,7 @@
 
 window.WILD_XI_PLAYER_ROWS = [
   ['Boulder','🦛','Nilski konj','GK','CB','H','Mammal','Hippopotamidae','Epic',[35, 25, 48, 88, 96, 91],'wall','Snažan golman koji tijelom zatvara veliki dio gola.'],
-  ['Catkeeper','🐈','Mačka','GK','ST','C','Mammal','Felidae','Legendary',[72, 60, 75, 78, 65, 95],'reflexMaster','Munjeviti refleksi i nevjerovatna reakcija na blizinu.'],
+  ['Catkeeper','🐈','Mačka','GK','ST','C','Mammal','Felidae','Legendary',[72, 60, 75, 78, 65, 99],'reflexMaster','Munjeviti refleksi i nevjerovatna reakcija na blizinu.'],
   ['Eyti','🐙','Oktopus','GK','CM','C','Mollusk','Octopodidae','Epic',[40, 30, 75, 88, 80, 95],'reflexMaster','Osam krakova daju mu doseg koji drugi golmani nemaju.'],
   ['Froggy','🐸','Žaba','GK','CB','C','Amphibian','Ranidae','Epic',[66, 25, 55, 82, 70, 96],'reflexMaster','Eksplozivno se odbacuje i brani udarce iz uglova.'],
   ['Antler','🦌','Jelen','LB','LW','H','Mammal','Cervidae','Rare',[88, 58, 70, 76, 78, 55],'speedster','Dugim korakom pokriva lijevu stranu terena.'],
@@ -19,7 +19,9 @@ window.WILD_XI_PLAYER_ROWS = [
   ['Riptide','🐬','Delfin','CM','CDM','C','Mammal','Delphinidae','Epic',[82, 70, 94, 76, 75, 65],'playmaker','Pametno povezuje linije i ubrzava protok lopte.'],
   ['Flash','🐆','Gepard','RW','LW','C','Mammal','Felidae','Legendary',[99, 88, 78, 60, 75, 55],'speedster','Najbrža životinja na terenu; razara odbranu u kontri.'],
   ['Blaze','🐅','Tigar','ST','LW','C','Mammal','Felidae','Epic',[86, 92, 72, 82, 92, 56],'finisher','Snažan napadač s preciznim i eksplozivnim završetkom.'],
-  ['King Roar','🦁','Lav','ST','RW','C','Mammal','Felidae','Legendary',[88, 96, 86, 90, 96, 60],'captain','Vođa ekipe koji podiže samopouzdanje cijelog tima.'],
+
+['King Roar','🦁','Lav','CB','ST','C','Mammal','Felidae','Legendary',[89, 85, 89, 96, 97, 50],'captain','Kralj odbrane koji dominira fizičkim duelima, čita protivničke napade i svojom snagom i autoritetom podiže cijelu zadnju liniju.'],
+
   ['Zig','🦓','Zebra','RB','LB','H','Mammal','Equidae','Common',[84, 58, 62, 70, 76, 55],'speedster','Izdržljiv bek koji stalno trči uz aut-liniju.'],
   ['Spots','🐆','Leopard','RW','ST','C','Mammal','Felidae','Epic',[92, 86, 75, 78, 84, 52],'finisher','Tiho se ušunja iza odbrane i kažnjava grešku.'],
   ['Velocity','🐆','Jaguar','LW','RW','C','Mammal','Felidae','Epic',[89, 88, 74, 82, 90, 50],'finisher','Snažan prodor i udarac iz gotovo nemogućeg ugla.'],
@@ -119,6 +121,9 @@ window.WILD_XI_PLAYER_ROWS = [
 'Rhinocerotidae','Legendary',[98, 75, 94, 96, 97, 55],
 'wall','Legendarni defanzivac koji koristi svoju ogromnu snagu i čvrst oklop da zaustavi i najopasnije napadače.'],
 
+['Capybara','🦫','Kapibara','LW','CM','H','Mammal','Hydrochoeridae','Epic',[91, 80, 94, 88, 86, 40],'playmaker','The Calm Architect: Smireni kreator igre koji preciznim dodavanjima, odličnom kontrolom lopte i fizičkom stabilnošću povezuje vezni red i otvara prostor za napad.'],
+
+
 
   
   ['SeaTurtle','🐢','Morska kornjača','CB','CDM','H','Reptile','Cheloniidae','Rare',[42, 40, 62, 88, 84, 40],'wall','Čvrst defanzivac koji štiti centralni prostor i otežava prodore.'],
@@ -149,5 +154,6 @@ window.WILD_XI_DINO_ROWS = [
   ['Galli','🦕','Gallimimus','CB','CDM','O','Dinosaur','Ceratopsidae','Dinosaur',[78, 70, 90, 99, 99, 45],'wall','Tri roga i oklopljena lubanja: kroz njega se ne prolazi.'],
   ['Spino','🦖','Spinosaurus','CDM','CM','C','Dinosaur','Spinosauridae','Dinosaur',[78, 88, 95, 98, 99, 45],'interceptor','Najveći grabežljivac s jedrom na leđima: presijeca sve što se kreće sredinom.'],
   ['Brachio','🦕','Brachiosaurus','GK','CB','H','Dinosaur','Brachiosauridae','Dinosaur',[55, 40, 92, 96, 99, 99],'reflexMaster','Div dugog vrata koji dohvati svaku loptu, ma gdje letjela.'],
+  ['Stego','🦕','Stegosaurus','CDM','CB','H','Dinosaur','Stegosauridae','Dinosaur',[79, 79, 94, 99, 99, 92],'wall','Ekskluzivni čuvar sredine: oklopljene ploče i bodljikav rep čine ga gotovo neprobojnim zidom ispred odbrane.'],
   ['Ptera','🦅','Pteranodon','CAM','LW','C','Dinosaur','Pteranodontidae','Dinosaur',[99, 96, 99, 70, 78, 45],'playmaker','Kruži iznad igre i vidi svaki prolaz prije svih ostalih.']
 ];
