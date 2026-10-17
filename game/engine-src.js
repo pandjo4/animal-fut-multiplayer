@@ -26,7 +26,7 @@ const GAME_DATA = {
     C: { name: 'Carnivore', icon: '🥩', col: '#ff6b5e' },
     O: { name: 'Omnivore', icon: '🍽️', col: '#ffbe46' }
   },
-  CLASS: { Mammal: '🐾', Bird: '🪶', Reptile: '🦎', Amphibian: '🐸', Arthropod: '🕷️', Fish: '🐟', Mollusk: '🐚' },
+  CLASS: { Mammal: '🐾', Insect: '🪳', Bird: '🪶', Reptile: '🦎', Amphibian: '🐸', Arthropod: '🕷️', Fish: '🐟', Mollusk: '🐚', Echinoderm: '⭐' },
   FAMILY: {
     Feline: 'Mačke', Canine: 'Psi', Raptor: 'Grabljivice', Elephant: 'Slonovi', Rhino: 'Nosorozi',
     Crocodilian: 'Krokodili', Bovine: 'Goveda', Equine: 'Konji', Cervid: 'Jeleni', Giraffid: 'Žirafe',
@@ -71,12 +71,17 @@ const GAME_DATA = {
     possession: { name: 'Possession', icon: '🔁', desc: 'More possession and short passing.', ctrl: 1.06, atk: 1, def: 1, wing: .8, through: 1.35, long: .6, counter: .6, foul: .8, intercept: 0 },
     counter:    { name: 'Counter',    icon: '🏃', desc: 'Waits for mistakes and counterattacks.', ctrl: .95, atk: 1.02, def: 1.02, wing: 1, through: 1, long: .9, counter: 1.9, foul: 1, intercept: .03 },
     direct:     { name: 'Direct',     icon: '🎯', desc: 'Crosses, corners, and long-range shots.', ctrl: .97, atk: 1.02, def: 1, wing: 1.6, through: .6, long: 1.5, counter: 1, foul: 1.1, intercept: 0 },
-    press:      { name: 'High Press', icon: '🔥', desc: 'Aggressive interceptions, with more fouls.', ctrl: 1.03, atk: 1, def: .98, wing: 1, through: 1, long: 1, counter: 1.25, foul: 1.5, intercept: .05 }
+    press:      { name: 'High Press', icon: '🔥', desc: 'Aggressive interceptions, with more fouls.', ctrl: 1.03, atk: 1, def: .98, wing: 1, through: 1, long: 1, counter: 1.25, foul: 1.5, intercept: .05 },
+    defensive:  { name: 'Park the Bus', icon: '🚌', desc: 'Deep and compact; dangerous on the counter.', ctrl: .92, atk: .94, def: 1.1, wing: .8, through: .7, long: 1.3, counter: 1.6, foul: 1.05, intercept: .03 },
+    wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.02, def: .98, wing: 1.8, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
+    longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.03, def: 1, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
+    total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 }
   },
   PACKS: [
     { id: 'basic', name: 'Basic Pack', price: 100, icon: '📦', c1: '#5d7a6b', c2: '#2c4437', desc: 'Mostly Common players.', odds: { Common: 85, Rare: 14, Epic: 1, Legendary: 0 } },
     { id: 'rare', name: 'Rare Pack', price: 300, icon: '🎁', c1: '#2f86d6', c2: '#123e73', desc: 'Good chance of Rare, small chance of Epic.', odds: { Common: 30, Rare: 60, Epic: 9.5, Legendary: 0.5 } },
-    { id: 'epic', name: 'Epic Pack', price: 750, icon: '💎', c1: '#9b54e6', c2: '#3b1673', desc: 'Good chance of Epic; Legendary is very rare.', odds: { Common: 5, Rare: 40, Epic: 52, Legendary: 3 } }
+    { id: 'epic', name: 'Epic Pack', price: 750, icon: '💎', c1: '#9b54e6', c2: '#3b1673', desc: 'Good chance of Epic; Legendary is very rare.', odds: { Common: 5, Rare: 40, Epic: 52, Legendary: 3 } },
+    { id: 'elite', name: 'Premium Pack', price: 1200, icon: '👑', c1: '#e6b422', c2: '#7a4a05', desc: 'Only Epic cards, with a chance of Legendary.', odds: { Common: 0, Rare: 0, Epic: 95, Legendary: 5 } }
   ],
   // klubovi: fam/diet/cls = tematska sklonost pri slaganju sastava
   CLUBS: [
@@ -97,7 +102,7 @@ const GAME_DATA = {
 
 const ASSETS = {
   animal: id => `images/animal/${(PLAYER_BY_ID[id] && PLAYER_BY_ID[id].id) || id}.png`,
-  pack: { basic:'images/packs/pack-basic.png', rare:'images/packs/pack-premium.png', epic:'images/packs/pack-legendary.png' },
+  pack: { basic:'images/packs/pack-basic.png', rare:'images/packs/pack-premium.png', epic:'images/packs/pack-legendary.png', elite:'images/packs/pack-elite.png' },
   audio: { matchStart:'audio/match-start.mp3', matchEnd:'audio/match-end.mp3', music:'audio/background-music.mp3' }
 };
 const MEDIA = {
@@ -148,13 +153,35 @@ GAME_DATA.FORMATIONS = {
     links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,5],[4,5],[5,7],[5,8],[6,7],[7,8],[8,9],[6,10],[7,10],[8,10],[9,10]] },
   '3412': { id: '3412', name: '3-4-1-2', desc: 'Three center-backs, a wide midfield, and a CAM behind two strikers.',
     slots: [['GK',50,90],['CB',23,76],['CB',50,79],['CB',77,76],['LB',12,54],['CM',35,54],['CM',65,54],['RB',88,54],['CAM',50,35],['ST',36,19],['ST',64,19]],
-    links: [[0,1],[0,2],[0,3],[1,2],[2,3],[1,4],[4,5],[5,6],[6,7],[7,3],[5,8],[6,8],[8,9],[8,10],[9,10]] }
+    links: [[0,1],[0,2],[0,3],[1,2],[2,3],[1,4],[4,5],[5,6],[6,7],[7,3],[5,8],[6,8],[8,9],[8,10],[9,10]] },
+  '4312': { id: '4312', name: '4-3-1-2', desc: 'Three midfielders feed a CAM behind two strikers.',
+    slots: [['GK',50,90],['LB',14,72],['CB',38,76],['CB',62,76],['RB',86,72],['CM',27,55],['CDM',50,60],['CM',73,55],['CAM',50,36],['ST',36,19],['ST',64,19]],
+    links: [[0,2],[0,3],[1,2],[1,5],[2,3],[2,5],[2,6],[3,4],[3,6],[3,7],[4,7],[5,6],[5,8],[6,7],[6,8],[7,8],[8,9],[8,10],[9,10]] },
+  '4321': { id: '4321', name: '4-3-2-1', desc: 'Christmas tree: two CAMs support a lone striker.',
+    slots: [['GK',50,90],['LB',14,72],['CB',38,76],['CB',62,76],['RB',86,72],['CM',27,56],['CDM',50,60],['CM',73,56],['CAM',33,35],['CAM',67,35],['ST',50,18]],
+    links: [[0,2],[0,3],[1,2],[1,5],[2,3],[2,6],[3,4],[3,6],[4,7],[5,6],[5,8],[6,7],[6,8],[6,9],[7,9],[8,10],[9,10]] },
+  '451': { id: '451', name: '4-5-1', desc: 'Packed midfield with wide wingers and a lone striker.',
+    slots: [['GK',50,90],['LB',14,72],['CB',38,76],['CB',62,76],['RB',86,72],['LW',12,46],['CM',32,52],['CDM',50,58],['CM',68,52],['RW',88,46],['ST',50,19]],
+    links: [[0,2],[0,3],[1,2],[1,5],[1,6],[2,3],[2,6],[2,7],[3,4],[3,7],[3,8],[4,8],[4,9],[5,6],[5,10],[6,7],[6,10],[7,8],[8,9],[8,10],[9,10]] },
+  '343': { id: '343', name: '3-4-3', desc: 'All-out attack: three center-backs, wide midfield and three forwards.',
+    slots: [['GK',50,90],['CB',24,76],['CB',50,79],['CB',76,76],['LB',12,56],['CM',38,54],['CM',62,54],['RB',88,56],['LW',18,27],['ST',50,19],['RW',82,27]],
+    links: [[0,1],[0,2],[0,3],[1,2],[1,4],[1,5],[2,3],[2,5],[3,6],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,9],[7,10],[8,9],[9,10]] },
+  '541': { id: '541', name: '5-4-1', desc: 'Ultra-defensive: five at the back and a lone striker on the counter.',
+    slots: [['GK',50,90],['LB',10,66],['CB',30,77],['CB',50,80],['CB',70,77],['RB',90,66],['LW',17,46],['CM',38,52],['CM',62,52],['RW',83,46],['ST',50,19]],
+    links: [[0,2],[0,3],[0,4],[1,2],[1,6],[1,7],[2,3],[2,7],[3,4],[4,5],[4,8],[5,8],[5,9],[6,7],[6,10],[7,8],[7,10],[8,9],[8,10],[9,10]] },
+  '4411': { id: '4411', name: '4-4-1-1', desc: 'Flat four in midfield with a second striker dropping into the gaps.',
+    slots: [['GK',50,90],['LB',14,72],['CB',38,76],['CB',62,76],['RB',86,72],['LW',14,50],['CM',38,55],['CM',62,55],['RW',86,50],['CAM',50,34],['ST',50,18]],
+    links: [[0,2],[0,3],[1,2],[1,5],[1,6],[2,3],[2,6],[3,4],[3,7],[4,7],[4,8],[5,6],[5,9],[5,10],[6,7],[6,9],[7,8],[7,9],[8,9],[8,10],[9,10]] },
+  '3421': { id: '3421', name: '3-4-2-1', desc: 'Three center-backs, wide midfield and two creators behind a striker.',
+    slots: [['GK',50,90],['CB',23,76],['CB',50,79],['CB',77,76],['LB',12,54],['CM',38,54],['CM',62,54],['RB',88,54],['CAM',33,34],['CAM',67,34],['ST',50,18]],
+    links: [[0,1],[0,2],[0,3],[1,2],[1,4],[1,5],[2,3],[2,5],[3,6],[3,7],[4,5],[4,8],[5,6],[5,8],[6,7],[6,9],[7,9],[8,10],[9,10]] }
 };
 
 
 // Family labels use the scientific family names stored on every card (the original table used English
 // group keys that never matched any card, so labels fell back to Latin and club themes never applied).
 Object.assign(GAME_DATA.FAMILY, {
+  Asteriidae: 'Morske zvijezde', Apterygidae: 'Kivi ptice', Istiophoridae: 'Marlini', Dugongidae: 'Dugongi',
   Accipitridae: 'Orlovi i jastrebovi', Ailuridae: 'Crvene pande', Alcedinidae: 'Vodomari', Alcidae: 'Njorke i tupici',
   Alligatoridae: 'Aligatori', Araneae: 'Pauci', Balaenopteridae: 'Kitovi brazdaši', Bovidae: 'Goveda i antilope',
   Bradypodidae: 'Ljenjivci', Camelidae: 'Kamile', Canidae: 'Psi', Castoridae: 'Dabrovi', Cervidae: 'Jeleni',
@@ -207,6 +234,16 @@ GAME_DATA.EXCLUSIVES = {
       { id: 'streak', icon: '🔥', label: 'Reach a 8-win streak', need: 8, get: () => (STATE.stats.bestStreak || 0) },
       { id: 'played', icon: '⚽', label: 'Play 100 matches', need: 100, get: () => (STATE.stats.played || 0) }
     ]
+  },
+  // Dostupan samo preko koda (WILDXI-ADMIN1); ne pojavljuje se u misijama ni u paketima.
+  'crni-marlin': { codeOnly: true, quest: 'Secret code', requirements: [] },
+    // Dostupan samo preko koda (WILDXI-ADMIN2); ne pojavljuje se u misijama ni u paketima.
+  'skakavac': { codeOnly: true, quest: 'Secret code', requirements: [] },
+  dugong: {
+    quest: 'Loyal fan',
+    requirements: [
+      { id: 'days', icon: '📅', label: 'Play matches on 3 different days', need: 3, get: () => ((STATE.playDays || []).length) }
+    ]
   }
 };
 
@@ -227,7 +264,7 @@ function animalKey(species) {
   const aliases = {
     'zlatni orao':'orao', 'crni orao':'orao', 'bijeli orao':'orao',
     'crna pantera':'pantera', 'polarna lisica':'lisica', 'crvena lisica':'lisica', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk',
-    'arkticki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'snjezni leopard':'leopard', 'bijeli nosorog':'nosorog',
+    'arkticki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'arkt icki vuk':'vuk', 'snjezni leopard':'leopard',
     'divlji bivol':'bivo', 'bizon':'bizon', 'bizon jr':'bizon',
     'grizli':'medvjed', 'polarni medvjed':'medvjed',
     'morska kornjaca':'kornjaca', 'divovska kornjaca':'kornjaca',
@@ -426,7 +463,7 @@ const SQUAD_SYSTEM = {
     const ovr = filled.length ? Math.round(filled.reduce((a, s) => a + s.ovr, 0) / filled.length) : 0;
     const complete = filled.length === slots.length;
     const team = {
-      name: t.name || 'Your XI', icon: t.icon || '🐾', c1: t.c1 || '#d9a21a', c2: t.c2 || '#6b4a05', stadium: t.stadium || 'Wild Arena',
+      name: t.name || 'Your XI', user: !!t.user, crest: t.crest || null, icon: (t.user && typeof window.renderUserCrest === 'function') ? window.renderUserCrest(40) : (t.icon || '🐾'), c1: t.c1 || '#d9a21a', c2: t.c2 || '#6b4a05', stadium: t.stadium || 'Wild Arena',
       formation: t.formation, fm: F, styleId: t.style || 'balanced', style, boost: t.boost || 0,
       slots, players, chem, ovr, complete, chemMult, clubId: t.clubId || null
     };
@@ -480,7 +517,7 @@ const SAVE_SYSTEM = {
       stats: { played: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, saves: 0, tournaments: 0, trophies: 0, finals: 0, packs: 0, coinsEarned: 0, streak: 0, bestStreak: 0 },
       best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false },
       upgrades: {},
-      squad: null, draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: []
+      squad: null, draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
     };
   },
   sanitize(d) {
@@ -519,6 +556,8 @@ const SAVE_SYSTEM = {
     const old = !(d.v >= 2); // v1: jedini 'squad' je bio rezultat drafta
     if (old) { if (okSquad(d.squad)) out.draftSquad = cp(d.squad); }
     else { if (okSquad(d.squad)) out.squad = cp(d.squad); if (okSquad(d.draftSquad)) out.draftSquad = cp(d.draftSquad); }
+    if (Array.isArray(d.playDays)) out.playDays = [...new Set(d.playDays.filter((x) => typeof x === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x)))].slice(-400);
+    if (Number.isFinite(d.playedSeen)) out.playedSeen = d.playedSeen;
     out.starterGiven = !!d.starterGiven;
     if (d.draft && GAME_DATA.FORMATIONS[d.draft.formation] && Array.isArray(d.draft.slots) && d.draft.slots.length === 11 && d.draft.slots.every((x) => x === null || PLAYER_BY_ID[x]) &&
         Array.isArray(d.draft.offers) && d.draft.offers.every((x) => PLAYER_BY_ID[x]) && Array.isArray(d.draft.picked)) {
@@ -530,7 +569,8 @@ const SAVE_SYSTEM = {
     }
     return out;
   },
-  finalize(st) { // starter set od 11 Common players (only dodaje, nikad ne briše)
+  finalize(st) {
+    if (!Number.isFinite(st.playedSeen)) st.playedSeen = (st.stats && st.stats.played) || 0; // starter set od 11 Common players (only dodaje, nikad ne briše)
     if (!st.starterGiven) { GAME_DATA.STARTER_IDS.forEach((id) => { if (!st.owned[id]) st.owned[id] = 1; }); st.starterGiven = true; }
     return st;
   },
@@ -561,7 +601,16 @@ const BASE_PLAYER_STATS = {};
 PLAYER_DATABASE.forEach(p => { BASE_PLAYER_STATS[p.id] = { ovr:p.ovr, attrs:{...p.attrs}, stats:p.stats.slice() }; });
 function applyPlayerUpgradeLevel(id, level) { const p=PLAYER_BY_ID[id], b=BASE_PLAYER_STATS[id]; if(!p||!b)return; p.ovr=b.ovr+level; p.attrs={...b.attrs}; Object.keys(p.attrs).forEach(k => { p.attrs[k]=Math.min(99,p.attrs[k]+level); }); p.stats=b.stats.slice(); }
 Object.keys(STATE.upgrades || {}).forEach(id => applyPlayerUpgradeLevel(id, STATE.upgrades[id]));
-const persist = () => SAVE_SYSTEM.save(STATE);
+function trackPlayDay() {
+  const played = (STATE.stats && STATE.stats.played) || 0;
+  if (played > (STATE.playedSeen || 0)) {
+    const day = new Date().toISOString().slice(0, 10);
+    if (!Array.isArray(STATE.playDays)) STATE.playDays = [];
+    if (!STATE.playDays.includes(day)) STATE.playDays.push(day);
+    STATE.playedSeen = played;
+  }
+}
+const persist = () => { trackPlayDay(); SAVE_SYSTEM.save(STATE); };
 
 /* ==========================================================
    MATCH_ENGINE — događaji od 1. do 90. minute (+ nadoknada, penali)
