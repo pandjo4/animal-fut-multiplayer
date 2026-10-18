@@ -10,7 +10,7 @@
    
 const GAME_DATA = {
   SAVE_KEY: 'wildxi.save',
-  SAVE_VERSION: 5,
+  SAVE_VERSION: 6,
   STARTER_IDS: ['boulder','antler','granite','coil','gallop','kong','bandit','swing','plume','tusker','rascal'],
   START_COINS: 300,
   RARITIES: ['Common', 'Rare', 'Epic', 'Legendary', 'Dinosaur'],
@@ -78,7 +78,8 @@ const GAME_DATA = {
     defensive:  { name: 'Park the Bus', icon: '🚌', desc: 'Deep and compact; dangerous on the counter.', ctrl: .92, atk: .94, def: 1.1, wing: .8, through: .7, long: 1.3, counter: 1.6, foul: 1.05, intercept: .03 },
     wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.02, def: .98, wing: 1.8, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
     longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.03, def: 1, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
-    total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 }
+    total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 },
+    gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.04, def: 1.01, wing: 1.05, through: 1.08, long: .85, counter: 1.35, foul: 1.35, intercept: .065 }
   },
   PACKS: [
     { id: 'basic', name: 'Basic Pack', price: 100, icon: '📦', c1: '#5d7a6b', c2: '#2c4437', desc: 'Mostly Common players.', odds: { Common: 85, Rare: 14, Epic: 1, Legendary: 0 } },
@@ -179,7 +180,13 @@ GAME_DATA.FORMATIONS = {
     links: [[0,2],[0,3],[1,2],[1,5],[1,6],[2,3],[2,6],[3,4],[3,7],[4,7],[4,8],[5,6],[5,9],[5,10],[6,7],[6,9],[7,8],[7,9],[8,9],[8,10],[9,10]] },
   '3421': { id: '3421', name: '3-4-2-1', desc: 'Three center-backs, wide midfield and two creators behind a striker.',
     slots: [['GK',50,90],['CB',23,76],['CB',50,79],['CB',77,76],['LB',12,54],['CM',38,54],['CM',62,54],['RB',88,54],['CAM',33,34],['CAM',67,34],['ST',50,18]],
-    links: [[0,1],[0,2],[0,3],[1,2],[1,4],[1,5],[2,3],[2,5],[3,6],[3,7],[4,5],[4,8],[5,6],[5,8],[6,7],[6,9],[7,9],[8,10],[9,10]] }
+    links: [[0,1],[0,2],[0,3],[1,2],[1,4],[1,5],[2,3],[2,5],[3,6],[3,7],[4,5],[4,8],[5,6],[5,8],[6,7],[6,9],[7,9],[8,10],[9,10]] },
+  '4222': { id: '4222', name: '4-2-2-2', desc: 'Two holding midfielders protect the back four while two narrow creators feed a pair of strikers.',
+    slots: [['GK',50,90],['LB',13,72],['CB',38,76],['CB',62,76],['RB',87,72],['CDM',38,59],['CDM',62,59],['CAM',34,38],['CAM',66,38],['ST',36,19],['ST',64,19]],
+    links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,6],[4,6],[5,6],[5,7],[6,8],[7,8],[7,9],[7,10],[8,9],[8,10],[9,10]] },
+  '41212': { id: '41212', name: '4-1-2-1-2', desc: 'A narrow diamond midfield overloads the centre and connects a CAM to two strikers.',
+    slots: [['GK',50,90],['LB',13,72],['CB',38,76],['CB',62,76],['RB',87,72],['CDM',50,62],['CM',30,49],['CM',70,49],['CAM',50,35],['ST',36,19],['ST',64,19]],
+    links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,5],[4,5],[5,6],[5,7],[6,7],[6,8],[7,8],[8,9],[8,10],[9,10]] }
 };
 
 
@@ -202,7 +209,7 @@ Object.assign(GAME_DATA.FAMILY, {
   Serpentes: 'Zmije', Spheniscidae: 'Pingvini', Strigidae: 'Sove', Struthionidae: 'Nojevi', Suidae: 'Svinje',
   Tapiridae: 'Tapiri', Trochilidae: 'Kolibri', Ursidae: 'Medvjedi',
   Tyrannosauridae: 'Tiranosauri', Dromaeosauridae: 'Raptori', Ceratopsidae: 'Rogati dinosauri', Spinosauridae: 'Spinosauri',
-  Brachiosauridae: 'Dugovrati dinosauri', Pteranodontidae: 'Pterosauri'
+  Brachiosauridae: 'Dugovrati dinosauri', Stegosauridae: 'Stegosauri', Pteranodontidae: 'Pterosauri'
 });
 // Club theme keys -> real family names on the cards (so the +6 family bias in AI squad building works).
 (function () {
@@ -256,7 +263,7 @@ GAME_DATA.EXCLUSIVES = {
 
 // Secret codes for Dinosaur cards (the only way to get one besides the Prehistoric Hit Pack). Code -> card id.
 GAME_DATA.DINO_CODES = {
-  'WILDXI-TREX': 't-rex', 'WILDXI-RAPTOR': 'velociraptor', 'WILDXI-TRICERATOPS': 'triceratops',
+  'WILDXI-TREX': 't-rex', 'WILDXI-STEGO': 'stegosaurus', 'WILDXI-RAPTOR': 'velociraptor', 'WILDXI-GALLI': 'gallimimus',
   'WILDXI-SPINO': 'spinosaurus', 'WILDXI-BRACHIO': 'brachiosaurus', 'WILDXI-PTERA': 'pteranodon'
 };
 
@@ -537,7 +544,7 @@ const SAVE_SYSTEM = {
       stats: { played: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, saves: 0, tournaments: 0, trophies: 0, finals: 0, packs: 0, coinsEarned: 0, streak: 0, bestStreak: 0 },
       best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false },
       upgrades: {},
-      squad: null, draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
+      squad: null, savedSquads: [null, null, null], draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
     };
   },
   sanitize(d) {
@@ -576,6 +583,7 @@ const SAVE_SYSTEM = {
     const old = !(d.v >= 2); // v1: jedini 'squad' je bio rezultat drafta
     if (old) { if (okSquad(d.squad)) out.draftSquad = cp(d.squad); }
     else { if (okSquad(d.squad)) out.squad = cp(d.squad); if (okSquad(d.draftSquad)) out.draftSquad = cp(d.draftSquad); }
+    if (Array.isArray(d.savedSquads)) out.savedSquads = Array.from({length:3}, (_,i) => okSquad(d.savedSquads[i]) ? {...cp(d.savedSquads[i]), name: String(d.savedSquads[i].name || `Team ${i+1}`).slice(0,24)} : null);
     if (Array.isArray(d.playDays)) out.playDays = [...new Set(d.playDays.filter((x) => typeof x === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x)))].slice(-400);
     if (Number.isFinite(d.playedSeen)) out.playedSeen = d.playedSeen;
     out.starterGiven = !!d.starterGiven;
