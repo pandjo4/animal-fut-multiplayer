@@ -128,7 +128,13 @@ window.WILD_XI_PLAYER_ROWS = [
   
   ['SeaTurtle','🐢','Morska kornjača','CB','CDM','H','Reptile','Cheloniidae','Rare',[42, 40, 62, 88, 84, 40],'wall','Čvrst defanzivac koji štiti centralni prostor i otežava prodore.'],
   ['Astro','⭐','Morska zvijezda','RB','CB','O','Echinoderm','Asteriidae','Epic',[75, 50, 83, 94, 88, 45],'wall','Pet krakova zatvara cijeli desni bok, a oporavlja se brže nego što ga protivnik zaobiđe.'],
-  ['Kiwi','🥝','Kivi','LB','LW','O','Bird','Apterygidae','Epic',[84, 80, 81, 87, 74, 50],'interceptor','Neumorno trči uz lijevu liniju i tiho presijeca dodavanja.']
+  ['Kiwi','🥝','Kivi','LB','LW','O','Bird','Apterygidae','Epic',[84, 80, 81, 87, 74, 50],'interceptor','Neumorno trči uz lijevu liniju i tiho presijeca dodavanja.'],
+  // Five genuinely new pack players. Checked against the full original catalog by species.
+  ['Secretarybird','🐦','Zmijar','RB','RW','C','Bird','Sagittariidae','Rare',[91, 68, 78, 82, 72, 45],'interceptor','Brz desni bek koji čita dodavanja i presijeca napade.'],
+  ['Wombat','🐾','Vombat','CDM','CB','H','Mammal','Vombatidae','Common',[52, 48, 54, 82, 86, 38],'wall','Jeftin, čvrst defanzivni veznjak koji štiti prostor ispred odbrane.'],
+  ['Axolotl','🦎','Aksolotl','CAM','CM','C','Amphibian','Ambystomatidae','Rare',[70, 58, 82, 68, 62, 45],'playmaker','Neobičan tehničar koji zadržava loptu i pronalazi uska dodavanja.'],
+  ['Swordfish','🐟','Sabljarka','ST','RW','C','Fish','Xiphiidae','Epic',[96, 90, 78, 62, 86, 35],'finisher','Eksplozivan napadač koji napada prostor direktno i završava iz trka.'],
+  ['Okapi','🦒','Okapi','LB','CM','H','Mammal','Giraffidae','Rare',[78, 56, 72, 78, 78, 40],'interceptor','Pouzdan lijevi bek koji dobro čita igru i sigurno prenosi loptu u vezni red.']
 ];
 
 // EXCLUSIVE REWARD PLAYERS — never added to packs, AI squads or random offers.
@@ -142,7 +148,9 @@ window.WILD_XI_EXCLUSIVE_ROWS = [
   
 ['Grasshopper','🦗','Skakavac','RW','LW','H','Insect','Acrididae','Legendary',[98, 97, 89, 89, 89, 5],'speedster','Eksplozivnim skokovima i munjevitim promjenama pravca prolazi čuvare i pretvara svaki prodor u opasnost.'],
 	
-  ['Seacow','🦭','Dugong','GK','CB','H','Mammal','Dugongidae','Legendary',[45, 25, 82, 90, 95, 98],'reflexMaster','Mirni div koji zatvara cijeli gol i nikada ne gubi živce.']
+  ['Seacow','🦭','Dugong','GK','CB','H','Mammal','Dugongidae','Legendary',[45, 25, 82, 90, 95, 98],'reflexMaster','Mirni div koji zatvara cijeli gol i nikada ne gubi živce.'],
+  ['Shoebill','🐦','Kitoglav','CB','GK','C','Bird','Balaenicipitidae','Epic',[58, 62, 70, 92, 88, 88],'wall','Strpljivi čuvar prostora koji čita napad i zatvara centralne prolaze.'],
+  ['Civet','🐾','Cibetka','CAM','RW','O','Mammal','Viverridae','Epic',[81, 77, 85, 58, 59, 40],'playmaker','Kreativan i nepredvidiv igrač koji otvara prostor brzim kombinacijama.']
 ];
 
 // DINOSAUR (ICON) CARDS — rarity 'Dinosaur'. They are NOT in Basic/Rare/Epic/Premium packs, AI squads or drafts.

@@ -256,7 +256,21 @@ GAME_DATA.EXCLUSIVES = {
   dugong: {
     quest: 'Loyal fan',
     requirements: [
-      { id: 'days', icon: '📅', label: 'Play matches on 3 different days', need: 3, get: () => ((STATE.playDays || []).length) }
+      { id: 'days', icon: '📅', label: 'Play matches on 3 different days', need: 3, get: () => ((STATE.playDays || []).length) },
+      { id: 'saves', icon: '🧤', label: 'Record 100 goalkeeper saves', need: 100, get: () => (STATE.stats.saves || 0) }
+    ]
+  },
+  kitoglav: {
+    quest: 'Squad architect',
+    requirements: [
+      { id: 'chemistry', icon: '🔗', label: 'Build a squad with 68+ chemistry', need: 68, get: () => (STATE.best.chem || 0) },
+      { id: 'rating', icon: '⭐', label: 'Build a squad with 88+ team rating', need: 88, get: () => (STATE.best.ovr || 0) }
+    ]
+  },
+  cibetka: {
+    quest: 'Winning manager',
+    requirements: [
+      { id: 'wins', icon: '🏆', label: 'Win 25 matches', need: 25, get: () => (STATE.stats.wins || 0) }
     ]
   }
 };
