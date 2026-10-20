@@ -90,7 +90,7 @@ window.WILD_XI_PLAYER_ROWS = [
   ['Rooster','🐓','Pijetao','CAM','ST','O','Bird','Phasianidae','Rare',[72, 68, 78, 55, 58, 40],'captain','Borbenim duhom podiže samopouzdanje ekipe u ključnim trenucima.'],
   ['Bat','🦇','Šišmiš','GK','RW','O','Mammal','Chiroptera','Rare',[82, 58, 70, 68, 62, 81],'reflexMaster','Iznenadne promjene pravca i izuzetna reakcija otežavaju protivniku da ga nadmudri.'],
   ['Mouse','🐁','Miš','CAM','RW','O','Mammal','Muridae','Common',[84, 48, 82, 42, 35, 35],'playmaker','Sitnim i brzim kretnjama provlači dodavanja kroz uske prostore.'],
-  ['Spider','🕷️','Pauk','CDM','CAM','O','Arthropod','Araneae','Rare',[58, 62, 84, 86, 58, 50],'interceptor','Strpljivo čeka grešku i presijeca protivničke kombinacije.'],
+  ['JumpingSpider','🕷️','Vatreni skočac','CDM','CAM','O','Arthropod','Araneae','Rare',[58, 69, 84, 86, 58, 50],'interceptor','Strpljivo čeka grešku i presijeca protivničke kombinacije.'],
   ['Goat','🐐','Koza','RB','CM','H','Mammal','Bovidae','Common',[82, 58, 70, 72, 76, 38],'interceptor','Okretna u skučenom prostoru i uporna u osvajanju lopte.'],
   
 ['Iguana','🦎','Iguana','CAM','CM','H','Reptile','Iguanidae','Rare',[82, 84, 94, 65, 68, 39],'playmaker','Mirno kontroliše sredinu terena, preciznim dodavanjima povezuje linije i strpljivo čeka pravi trenutak za napad.'],
@@ -134,7 +134,20 @@ window.WILD_XI_PLAYER_ROWS = [
   ['Wombat','🐾','Vombat','CDM','CB','H','Mammal','Vombatidae','Common',[52, 48, 54, 82, 86, 38],'wall','Jeftin, čvrst defanzivni veznjak koji štiti prostor ispred odbrane.'],
   ['Axolotl','🦎','Aksolotl','CAM','CM','C','Amphibian','Ambystomatidae','Rare',[70, 58, 82, 68, 62, 45],'playmaker','Neobičan tehničar koji zadržava loptu i pronalazi uska dodavanja.'],
   ['Swordfish','🐟','Sabljarka','ST','RW','C','Fish','Xiphiidae','Epic',[96, 90, 78, 62, 86, 35],'finisher','Eksplozivan napadač koji napada prostor direktno i završava iz trka.'],
-  ['Okapi','🦒','Okapi','LB','CM','H','Mammal','Giraffidae','Rare',[78, 56, 72, 78, 78, 40],'interceptor','Pouzdan lijevi bek koji dobro čita igru i sigurno prenosi loptu u vezni red.']
+  ['Okapi','🦒','Okapi','LB','CM','H','Mammal','Giraffidae','Rare',[78, 56, 72, 78, 78, 40],'interceptor','Pouzdan lijevi bek koji dobro čita igru i sigurno prenosi loptu u vezni red.'],
+  ['Gerenuk','🦌','Gerenuk','ST','CF','H','Mammal','Bovidae','Legendary',[94, 96, 88, 62, 88, 40],'finisher','Legendarni napadač koji koristi nevjerovatnu visinu, elegantno kretanje i precizan završni udarac. Brzo pronalazi prostor iza odbrane, dominira u skoku i pretvara centaršuteve u golove.'],
+  
+  
+  
+  ['Reindeer','🦌','Sob','LB','CM','H','Mammal','Cervidae','Epic',[86, 62, 80, 84, 86, 45],'interceptor','Neumorni trkač koji satima pokriva lijevi bok i povezuje odbranu sa sredinom terena.'],
+  ['Matador','🐂','Bik','ST','CB','H','Mammal','Bovidae','Epic',[88, 90, 64, 70, 96, 40],'finisher','Biljojed koji probija sve pred sobom: snaga, brzina i udarac koji nijedan golman ne želi vidjeti.'],
+  ['Bumble','🐝','Pčela','CM','RW','H','Insect','Apidae','Rare',[84, 64, 88, 64, 54, 40],'playmaker','Marljiv radnik sredine terena koji neumorno raznosi loptu i pronalazi slobodnog igrača.'],
+  ['Barracuda','🐟','Barakuda','CDM','CB','C','Fish','Sphyraenidae','Epic',[75, 68, 76, 88, 90, 40],'interceptor','Brz i agresivan grabežljivac koji presijeca svaku loptu ispred odbrane.'],
+  ['BlackWidow','🕷️','Crna udovica','CDM','CAM','C','Arthropod','Araneae','Rare',[60, 64, 82, 84, 60, 45],'interceptor','Strpljivo plete mrežu ispred odbrane i kažnjava svaku grešku protivničkog veznog reda.'],
+  ['Tarantula','🕷️','Tarantula','CB','CDM','C','Arthropod','Araneae','Rare',[52, 50, 58, 86, 84, 40],'wall','Dlakava i čvrsta: čeka u zasjedi i zatvara prostor ispred gola.'],
+  ['Dragonfly','🪲','Vilin konjic','LB','LW','C','Insect','Libellulidae','Common',[84, 62, 66, 70, 58, 38],'speedster','Nepomično vreba, a onda munjevito napada po lijevoj strani.'],
+  ['Raven','🐦','Gavran','ST','CAM','O','Bird','Corvidae','Rare',[80, 80, 82, 60, 66, 38],'finisher','Pametan svejed koji čita odbranu i završava akciju hladne glave.']
+	
 ];
 
 // EXCLUSIVE REWARD PLAYERS — never added to packs, AI squads or random offers.
@@ -147,7 +160,7 @@ window.WILD_XI_EXCLUSIVE_ROWS = [
   ['Rapier','🐟','Crni marlin','LW','RW','C','Fish','Istiophoridae','Legendary',[99, 94, 88, 65, 90, 55],'speedster','Najbrži lovac okeana: probija bok brzinom koju niko ne može pratiti.'],
   
 ['Grasshopper','🦗','Skakavac','RW','LW','H','Insect','Acrididae','Legendary',[98, 97, 89, 89, 89, 5],'speedster','Eksplozivnim skokovima i munjevitim promjenama pravca prolazi čuvare i pretvara svaki prodor u opasnost.'],
-	
+
   ['Seacow','🦭','Dugong','GK','CB','H','Mammal','Dugongidae','Legendary',[45, 25, 82, 90, 95, 98],'reflexMaster','Mirni div koji zatvara cijeli gol i nikada ne gubi živce.'],
   ['Shoebill','🐦','Kitoglav','CB','GK','C','Bird','Balaenicipitidae','Epic',[58, 62, 70, 92, 88, 88],'wall','Strpljivi čuvar prostora koji čita napad i zatvara centralne prolaze.'],
   ['Civet','🐾','Cibetka','CAM','RW','O','Mammal','Viverridae','Epic',[81, 77, 85, 58, 59, 40],'playmaker','Kreativan i nepredvidiv igrač koji otvara prostor brzim kombinacijama.']

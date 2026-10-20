@@ -1,0 +1,6 @@
+CORRECTED ANIMAL FUT CARD ADDITIONS
+
+The multiplayer server catalog recognizes the same seven new species as the main game.
+5 pack cards: Zmijar (secretarybird.png), Vombat (wombat.png), Aksolotl (axolotl.png), Sabljarka (swordfish.png), Okapi (okapi.png).
+2 achievement cards: Kitoglav (shoebill.png), Cibetka (civet.png).
+Images are not included; add matching PNGs to the main game's images/animal/ folder.

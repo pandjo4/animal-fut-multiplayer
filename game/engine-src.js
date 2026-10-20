@@ -556,7 +556,7 @@ const SAVE_SYSTEM = {
     return {
       v: GAME_DATA.SAVE_VERSION, coins: GAME_DATA.START_COINS, owned: {},
       stats: { played: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, saves: 0, tournaments: 0, trophies: 0, finals: 0, packs: 0, coinsEarned: 0, streak: 0, bestStreak: 0 },
-      best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false },
+      best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false, positionWarningsCollapsed: true },
       upgrades: {},
       squad: null, savedSquads: [null, null, null], draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
     };
@@ -582,6 +582,7 @@ const SAVE_SYSTEM = {
     if (Array.isArray(d.history)) out.history = d.history.filter((h) => h && typeof h === 'object').slice(0, 30);
     if (d.settings && ['normal', 'fast'].includes(d.settings.speed)) out.settings.speed = d.settings.speed;
     if (d.settings && typeof d.settings.tacticsCollapsed === 'boolean') out.settings.tacticsCollapsed = d.settings.tacticsCollapsed;
+    if (d.settings && typeof d.settings.positionWarningsCollapsed === 'boolean') out.settings.positionWarningsCollapsed = d.settings.positionWarningsCollapsed;
     if (d.upgrades && typeof d.upgrades === 'object') for (const id in d.upgrades) { const canonical = canonicalPlayerId(id); const level = Number(d.upgrades[id]); if (canonical && Number.isInteger(level) && level >= 1 && level <= 3) out.upgrades[canonical] = level; }
     if (typeof d.managerName === 'string') out.managerName = d.managerName.trim().slice(0, 18) || 'Wild XI';
     if (Array.isArray(d.redeemedCodes)) out.redeemedCodes = [...new Set(d.redeemedCodes.filter((x) => typeof x === 'string').map((x) => x.toUpperCase().slice(0, 64)))];
