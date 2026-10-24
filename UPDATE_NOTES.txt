@@ -1,0 +1,11 @@
+Animal FUT update notes
+
+Frontend changes:
+- Added Regular Squad Cup (existing squad cup), Common & Rare Cup, Herbivore Cup, and Carnivore Cup.
+- Restricted cups validate all 11 cards in the current Squad before the tournament starts. Common & Rare Cup allows only Common/Rare; Herbivore Cup allows only diet H; Carnivore Cup allows only diet C.
+- Tournament mode names are preserved in save data so the selected cup remains correct after reloading.
+- Collection card overview now has Previous/Next controls and mobile horizontal swipe navigation. Navigation follows the current collection sort and filters.
+
+Deployment:
+- Deploy the updated `actual game` folder to Netlify as usual.
+- The multiplayer server does not require code changes for these single-player tournament/collection UI features. The supplied multiplayer project is included separately for convenience.
