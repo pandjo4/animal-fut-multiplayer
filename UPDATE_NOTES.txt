@@ -9,3 +9,9 @@ Frontend changes:
 Deployment:
 - Deploy the updated `actual game` folder to Netlify as usual.
 - The multiplayer server does not require code changes for these single-player tournament/collection UI features. The supplied multiplayer project is included separately for convenience.
+
+
+2026-10-24 — Synced engine update
+- Synced the server simulation engine with the frontend's new formations and tactics.
+- Updated tournament save migration to preserve all supported tournament modes rather than converting non-regular cups to Draft Cup.
+- Verified JavaScript syntax and server test suite (30 passed, 0 failed).

@@ -79,7 +79,9 @@ const GAME_DATA = {
     wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.02, def: .98, wing: 1.8, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
     longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.03, def: 1, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
     total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 },
-    gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.04, def: 1.01, wing: 1.05, through: 1.08, long: .85, counter: 1.35, foul: 1.35, intercept: .065 }
+    gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.04, def: 1.01, wing: 1.05, through: 1.08, long: .85, counter: 1.35, foul: 1.35, intercept: .065 },
+    tikitaka:   { name: 'Tiki-Taka', icon: '🎯', desc: 'Short, precise combinations overload the centre and build patiently; weaker crossing and vulnerable against physical long-ball teams.', ctrl: 1.10, atk: 1.01, def: 1.00, wing: .58, through: 1.42, long: .55, counter: .72, foul: .90, intercept: .025 },
+    catenaccio: { name: 'Catenaccio', icon: '🏰', desc: 'Deep compact defending, tight marking and blocks; attacks with few players and risks more yellow cards.', ctrl: .88, atk: .84, def: 1.16, wing: .62, through: .68, long: 1.18, counter: 1.52, foul: 1.58, intercept: .075 }
   },
   PACKS: [
     { id: 'basic', name: 'Basic Pack', price: 100, icon: '📦', c1: '#5d7a6b', c2: '#2c4437', desc: 'Mostly Common players.', odds: { Common: 85, Rare: 14, Epic: 1, Legendary: 0 } },
@@ -186,7 +188,19 @@ GAME_DATA.FORMATIONS = {
     links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,6],[4,6],[5,6],[5,7],[6,8],[7,8],[7,9],[7,10],[8,9],[8,10],[9,10]] },
   '41212': { id: '41212', name: '4-1-2-1-2', desc: 'A narrow diamond midfield overloads the centre and connects a CAM to two strikers.',
     slots: [['GK',50,90],['LB',13,72],['CB',38,76],['CB',62,76],['RB',87,72],['CDM',50,62],['CM',30,49],['CM',70,49],['CAM',50,35],['ST',36,19],['ST',64,19]],
-    links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,5],[4,5],[5,6],[5,7],[6,7],[6,8],[7,8],[8,9],[8,10],[9,10]] }
+    links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,5],[4,5],[5,6],[5,7],[6,7],[6,8],[7,8],[8,9],[8,10],[9,10]] },
+   '3241': { id: '3241', name: '3-2-4-1', desc: 'Three centre-backs, a double pivot and four advanced midfielders create central overloads.',
+     slots: [['GK',50,90],['CB',25,76],['CB',50,79],['CB',75,76],['CDM',40,61],['CDM',60,61],['LW',14,39],['CAM',39,37],['CAM',61,34],['RW',86,39],['ST',50,17]],
+     links: [[0,1],[0,2],[0,3],[1,2],[2,3],[1,4],[2,4],[2,5],[3,5],[4,5],[4,7],[5,8],[6,7],[7,8],[8,9],[7,10],[8,10],[9,10]] },
+   '424': { id: '424', name: '4-2-4', desc: 'Four forwards stretch the back line; explosive attack with a risk of being outnumbered in midfield.',
+     slots: [['GK',50,90],['LB',13,72],['CB',38,76],['CB',62,76],['RB',87,72],['CM',42,57],['CDM',58,59],['LW',13,31],['ST',39,20],['ST',61,20],['RW',87,31]],
+     links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,6],[4,6],[5,6],[5,7],[5,8],[6,10],[6,9],[7,8],[8,9],[9,10]] },
+   '5212': { id: '5212', name: '5-2-1-2', desc: 'A back five protects the box while two central midfielders and a CAM launch quick counters.',
+     slots: [['GK',50,90],['LB',10,66],['CB',30,77],['CB',50,80],['CB',70,77],['RB',90,66],['CM',39,53],['CM',61,53],['CAM',50,36],['ST',36,19],['ST',64,19]],
+     links: [[0,2],[0,3],[0,4],[1,2],[2,3],[3,4],[4,5],[1,6],[2,6],[4,7],[5,7],[6,7],[6,8],[7,8],[8,9],[8,10],[9,10]] },
+   '4132': { id: '4132', name: '4-1-3-2', desc: 'A holding midfielder anchors the back four, with three advanced midfielders supporting two strikers.',
+     slots: [['GK',50,90],['LB',13,72],['CB',38,76],['CB',62,76],['RB',87,72],['CDM',50,61],['CM',30,47],['CAM',50,39],['CM',70,47],['ST',36,19],['ST',64,19]],
+     links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,5],[3,5],[4,5],[5,6],[5,8],[6,7],[7,8],[6,9],[7,9],[7,10],[8,10],[9,10]] }
 };
 
 
@@ -608,7 +622,7 @@ const SAVE_SYSTEM = {
     }
     if (d.tournament && Array.isArray(d.tournament.teams) && d.tournament.teams.length === 8 && Array.isArray(d.tournament.bracket) && d.tournament.bracket.length === 3) {
       const ok = d.tournament.teams.every((t) => t && GAME_DATA.FORMATIONS[t.formation] && Array.isArray(t.ids) && t.ids.length === 11 && t.ids.every((x) => PLAYER_BY_ID[x]));
-      if (ok) { out.tournament = d.tournament; if (out.tournament.mode !== 'squad') out.tournament.mode = 'draft'; }
+      if (ok) { out.tournament = d.tournament; if (!['draft', 'squad', 'commonrare', 'herbivore', 'carnivore'].includes(out.tournament.mode)) out.tournament.mode = 'draft'; }
     }
     return out;
   },
