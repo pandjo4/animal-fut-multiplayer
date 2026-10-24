@@ -70,13 +70,13 @@ const GAME_DATA = {
     interceptor: { name: 'Interceptor', icon: '✂️', desc: 'Intercepts passes and launches counterattacks.' }
   },
   STYLES: {
-    balanced:   { name: 'Balanced',   icon: '⚖️', desc: 'Bez posebnih bonusa.', ctrl: 1, atk: 1, def: 1, wing: 1, through: 1, long: 1, counter: 1, foul: 1, intercept: 0 },
-    possession: { name: 'Possession', icon: '🔁', desc: 'More possession and short passing.', ctrl: 1.06, atk: 1, def: 1, wing: .8, through: 1.35, long: .6, counter: .6, foul: .8, intercept: 0 },
+    balanced:   { name: 'Balanced',   icon: '⚖️', desc: 'Small all-round boost with no major weakness.', ctrl: 1, atk: 1.01, def: 1, wing: 1, through: 1, long: 1, counter: 1, foul: 1, intercept: 0 },
+    possession: { name: 'Possession', icon: '🔁', desc: 'More possession and short passing.', ctrl: 1.08, atk: 1, def: 1, wing: .8, through: 1.38, long: .6, counter: .6, foul: .8, intercept: 0 },
     counter:    { name: 'Counter',    icon: '🏃', desc: 'Waits for mistakes and counterattacks.', ctrl: .95, atk: 1.02, def: 1.02, wing: 1, through: 1, long: .9, counter: 1.9, foul: 1, intercept: .03 },
     direct:     { name: 'Direct',     icon: '🎯', desc: 'Crosses, corners, and long-range shots.', ctrl: .97, atk: 1.02, def: 1, wing: 1.6, through: .6, long: 1.5, counter: 1, foul: 1.1, intercept: 0 },
     press:      { name: 'High Press', icon: '🔥', desc: 'Aggressive interceptions, with more fouls.', ctrl: 1.03, atk: 1, def: .98, wing: 1, through: 1, long: 1, counter: 1.25, foul: 1.5, intercept: .05 },
     defensive:  { name: 'Park the Bus', icon: '🚌', desc: 'Deep and compact; dangerous on the counter.', ctrl: .92, atk: .94, def: 1.1, wing: .8, through: .7, long: 1.3, counter: 1.6, foul: 1.05, intercept: .03 },
-    wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.02, def: .98, wing: 1.8, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
+    wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.03, def: .98, wing: 1.9, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
     longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.03, def: 1, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
     total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 },
     gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.04, def: 1.01, wing: 1.05, through: 1.08, long: .85, counter: 1.35, foul: 1.35, intercept: .065 },
