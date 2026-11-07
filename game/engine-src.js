@@ -10,7 +10,7 @@
    
 const GAME_DATA = {
   SAVE_KEY: 'wildxi.save',
-  SAVE_VERSION: 6,
+  SAVE_VERSION: 7,
   STARTER_IDS: ['boulder','antler','granite','coil','gallop','kong','bandit','swing','plume','tusker','rascal'],
   START_COINS: 300,
   RARITIES: ['Common', 'Rare', 'Epic', 'Legendary', 'Dinosaur'],
@@ -70,17 +70,17 @@ const GAME_DATA = {
     interceptor: { name: 'Interceptor', icon: '✂️', desc: 'Intercepts passes and launches counterattacks.' }
   },
   STYLES: {
-    balanced:   { name: 'Balanced',   icon: '⚖️', desc: 'Small all-round boost with no major weakness.', ctrl: 1, atk: 1.01, def: 1, wing: 1, through: 1, long: 1, counter: 1, foul: 1, intercept: 0 },
-    possession: { name: 'Possession', icon: '🔁', desc: 'More possession and short passing.', ctrl: 1.08, atk: 1, def: 1, wing: .8, through: 1.38, long: .6, counter: .6, foul: .8, intercept: 0 },
-    counter:    { name: 'Counter',    icon: '🏃', desc: 'Waits for mistakes and counterattacks.', ctrl: .95, atk: 1.02, def: 1.02, wing: 1, through: 1, long: .9, counter: 1.9, foul: 1, intercept: .03 },
-    direct:     { name: 'Direct',     icon: '🎯', desc: 'Crosses, corners, and long-range shots.', ctrl: .97, atk: 1.02, def: 1, wing: 1.6, through: .6, long: 1.5, counter: 1, foul: 1.1, intercept: 0 },
-    press:      { name: 'High Press', icon: '🔥', desc: 'Aggressive interceptions, with more fouls.', ctrl: 1.03, atk: 1, def: .98, wing: 1, through: 1, long: 1, counter: 1.25, foul: 1.5, intercept: .05 },
-    defensive:  { name: 'Park the Bus', icon: '🚌', desc: 'Deep and compact; dangerous on the counter.', ctrl: .92, atk: .94, def: 1.1, wing: .8, through: .7, long: 1.3, counter: 1.6, foul: 1.05, intercept: .03 },
-    wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.03, def: .98, wing: 1.9, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
-    longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.03, def: 1, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
-    total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.04, atk: 1.03, def: .99, wing: 1.2, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 },
-    gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.04, def: 1.01, wing: 1.05, through: 1.08, long: .85, counter: 1.35, foul: 1.35, intercept: .065 },
-    tikitaka:   { name: 'Tiki-Taka', icon: '🎯', desc: 'Short, precise combinations overload the centre and build patiently; weaker crossing and vulnerable against physical long-ball teams.', ctrl: 1.10, atk: 1.01, def: 1.00, wing: .58, through: 1.42, long: .55, counter: .72, foul: .90, intercept: .025 },
+    balanced:   { name: 'Balanced',   icon: '⚖️', desc: 'Small all-round boost with no major weakness.', ctrl: 1, atk: 1.04, def: 1.04, wing: 1, through: 1, long: 1, counter: 1, foul: 1, intercept: 0 },
+    possession: { name: 'Possession', icon: '🔁', desc: 'More possession and short passing.', ctrl: 1.08, atk: 1.04, def: 1.03, wing: .8, through: 1.38, long: .6, counter: .6, foul: .8, intercept: 0 },
+    counter:    { name: 'Counter',    icon: '🏃', desc: 'Waits for mistakes and counterattacks.', ctrl: .95, atk: 1, def: 1, wing: 1, through: 1, long: .9, counter: 1.75, foul: 1, intercept: .03 },
+    direct:     { name: 'Direct',     icon: '🎯', desc: 'Crosses, corners, and long-range shots.', ctrl: .97, atk: 1.04, def: 1.04, wing: 1.4, through: .6, long: 1.5, counter: 1, foul: 1.2, intercept: 0 },
+    press:      { name: 'High Press', icon: '🔥', desc: 'Aggressive interceptions, with more fouls.', ctrl: 1.04, atk: 1.01, def: 1, wing: 1, through: 1, long: 1, counter: 1.25, foul: 1.5, intercept: .05 },
+    defensive:  { name: 'Park the Bus', icon: '🚌', desc: 'Deep and compact; dangerous on the counter.', ctrl: .92, atk: .92, def: 1.1, wing: .735, through: .7, long: 1.31, counter: 1.6, foul: 1.05, intercept: .03 },
+    wingplay:   { name: 'Wing Play', icon: '🪽', desc: 'Stretches the pitch with crosses from both flanks.', ctrl: 1, atk: 1.07, def: 1.06, wing: 1.9, through: .6, long: .8, counter: 1, foul: 1, intercept: 0 },
+    longball:   { name: 'Long Ball', icon: '🚀', desc: 'Skips midfield with direct long passes.', ctrl: .93, atk: 1.05, def: 1.04, wing: .8, through: .5, long: 1.9, counter: 1, foul: 1.05, intercept: 0 },
+    total:      { name: 'Total Football', icon: '🌀', desc: 'Fluid and aggressive; wins the ball high and plays through the middle.', ctrl: 1.05, atk: 1.06, def: .99, wing: 1.25, through: 1.2, long: .8, counter: 1.1, foul: 1.25, intercept: .02 },
+    gegenpress: { name: 'Gegenpress', icon: '⚡', desc: 'Immediately hunts the ball after losing it; intense pressure creates turnovers but costs stamina and discipline.', ctrl: 1.02, atk: 1.02, def: 1, wing: 1.05, through: 1.07, long: .85, counter: 1.34, foul: 1.36, intercept: .065 },
+    tikitaka:   { name: 'Tiki-Taka', icon: '🎯', desc: 'Short, precise combinations overload the centre and build patiently; weaker crossing and vulnerable against physical long-ball teams.', ctrl: 1.10, atk: 1.03, def: 1.02, wing: .6, through: 1.45, long: .55, counter: .72, foul: .90, intercept: .025 },
     catenaccio: { name: 'Catenaccio', icon: '🏰', desc: 'Deep compact defending, tight marking and blocks; attacks with few players and risks more yellow cards.', ctrl: .88, atk: .84, def: 1.16, wing: .62, through: .68, long: 1.18, counter: 1.52, foul: 1.58, intercept: .075 }
   },
   PACKS: [
@@ -538,6 +538,16 @@ const SQUAD_SYSTEM = {
       team.ctrl = this.rate(slots, 'ctrl') * style.ctrl * chemMult * (1 + tactical.ctrl);
       team.def = this.rate(slots, 'def') * style.def * chemMult * (1 + tactical.def);
       team.tactical = tactical;
+      const facilities = t.user ? (t.facilities || STATE.facilities || {}) : (t.facilities || {});
+      const facilityBonus = {
+        atk: (Number(facilities.lights)||0)*0.0004 + (Number(facilities.training)||0)*0.0001,
+        ctrl: (Number(facilities.pitch)||0)*0.0004 + (Number(facilities.stands)||0)*0.0003 + (Number(facilities.training)||0)*0.0001,
+        def: (Number(facilities.medical)||0)*0.0004 + (Number(facilities.training)||0)*0.0001
+      };
+      team.atk *= 1 + facilityBonus.atk;
+      team.ctrl *= 1 + facilityBonus.ctrl;
+      team.def *= 1 + facilityBonus.def;
+      team.facilityBonus = facilityBonus;
       team.gk = slots[0].eff.ref;
     }
     return team;
@@ -571,7 +581,7 @@ const SAVE_SYSTEM = {
       v: GAME_DATA.SAVE_VERSION, coins: GAME_DATA.START_COINS, owned: {},
       stats: { played: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, saves: 0, tournaments: 0, trophies: 0, finals: 0, packs: 0, coinsEarned: 0, streak: 0, bestStreak: 0 },
       best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false, positionWarningsCollapsed: true },
-      upgrades: {},
+      upgrades: {}, facilities: { pitch: 1, lights: 1, stands: 1, training: 1, medical: 1 },
       squad: null, savedSquads: [null, null, null], draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
     };
   },
@@ -598,6 +608,7 @@ const SAVE_SYSTEM = {
     if (d.settings && typeof d.settings.tacticsCollapsed === 'boolean') out.settings.tacticsCollapsed = d.settings.tacticsCollapsed;
     if (d.settings && typeof d.settings.positionWarningsCollapsed === 'boolean') out.settings.positionWarningsCollapsed = d.settings.positionWarningsCollapsed;
     if (d.upgrades && typeof d.upgrades === 'object') for (const id in d.upgrades) { const canonical = canonicalPlayerId(id); const level = Number(d.upgrades[id]); if (canonical && Number.isInteger(level) && level >= 1 && level <= 3) out.upgrades[canonical] = level; }
+    if (d.facilities && typeof d.facilities === 'object') for (const id of Object.keys(out.facilities)) { const level = Number(d.facilities[id]); if (Number.isInteger(level) && level >= 1 && level <= 10) out.facilities[id] = level; }
     if (typeof d.managerName === 'string') out.managerName = d.managerName.trim().slice(0, 18) || 'Wild XI';
     if (Array.isArray(d.redeemedCodes)) out.redeemedCodes = [...new Set(d.redeemedCodes.filter((x) => typeof x === 'string').map((x) => x.toUpperCase().slice(0, 64)))];
     // Exclusive reward cards: claim record is kept as a whitelist of known ids. A claimed card is always
