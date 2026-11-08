@@ -146,8 +146,12 @@ window.WILD_XI_PLAYER_ROWS = [
   ['BlackWidow','🕷️','Crna udovica','CDM','CAM','C','Arthropod','Araneae','Rare',[60, 64, 82, 84, 60, 45],'interceptor','Strpljivo plete mrežu ispred odbrane i kažnjava svaku grešku protivničkog veznog reda.'],
   ['Tarantula','🕷️','Tarantula','CB','CDM','C','Arthropod','Araneae','Rare',[52, 50, 58, 86, 84, 40],'wall','Dlakava i čvrsta: čeka u zasjedi i zatvara prostor ispred gola.'],
   ['Dragonfly','🪲','Vilin konjic','LB','LW','C','Insect','Libellulidae','Common',[84, 62, 66, 70, 58, 38],'speedster','Nepomično vreba, a onda munjevito napada po lijevoj strani.'],
-  ['Raven','🐦','Gavran','ST','CAM','O','Bird','Corvidae','Rare',[80, 80, 82, 60, 66, 38],'finisher','Pametan svejed koji čita odbranu i završava akciju hladne glave.']
-	
+  ['Raven','🐦','Gavran','ST','CAM','O','Bird','Corvidae','Rare',[80, 80, 82, 60, 66, 38],'finisher','Pametan svejed koji čita odbranu i završava akciju hladne glave.'],
+
+  // --- Added 2026-11-09: Stork (GK 93), Tasmanian Devil (ST 90), Manatee (CM 85) ---
+  ['Stork','🦢','Roda','GK','CB','O','Bird','Ciconiidae','Legendary',[60, 28, 80, 90, 92, 99],'reflexMaster','Dugonoga čuvarica gola: dugim krilima i kljunom zatvara svaki ugao i mirno gradi igru iz zadnje linije.'],
+  ['Tasmanian Devil','🐕','Tasmanijski đavo','ST','LW','O','Mammal','Dasyuridae','Legendary',[88, 94, 66, 60, 96, 40],'finisher','Žestok i neukrotiv napadač: snagom razbija odbranu i bez straha kažnjava svaku grešku.'],
+  ['Manatee','🐋','Lamantin','CM','CDM','H','Mammal','Trichechidae','Epic',[68, 76, 94, 86, 92, 40],'playmaker','Smireni div sredine terena: tiho kontroliše tempo, čvrsto drži loptu i precizno dijeli igru.']
 ];
 
 // EXCLUSIVE REWARD PLAYERS — never added to packs, AI squads or random offers.

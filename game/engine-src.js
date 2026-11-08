@@ -222,6 +222,7 @@ Object.assign(GAME_DATA.FAMILY, {
   Salamandridae: 'Daždevnjaci', Sciuridae: 'Vjeverice', Selachimorpha: 'Morski psi', Sepiidae: 'Sipe',
   Serpentes: 'Zmije', Spheniscidae: 'Pingvini', Strigidae: 'Sove', Struthionidae: 'Nojevi', Suidae: 'Svinje',
   Tapiridae: 'Tapiri', Trochilidae: 'Kolibri', Ursidae: 'Medvjedi',
+  Ciconiidae: 'Rode', Dasyuridae: 'Tasmanijski đavoli', Trichechidae: 'Lamantini',
   Tyrannosauridae: 'Tiranosauri', Dromaeosauridae: 'Raptori', Ceratopsidae: 'Rogati dinosauri', Spinosauridae: 'Spinosauri',
   Brachiosauridae: 'Dugovrati dinosauri', Stegosauridae: 'Stegosauri', Pteranodontidae: 'Pterosauri'
 });
@@ -233,8 +234,8 @@ Object.assign(GAME_DATA.FAMILY, {
     Raptor: ['Accipitridae', 'Falconidae', 'Strigidae'], Corvid: [], Kingfisher: ['Alcedinidae'],
     Primate: ['Primates', 'Hominidae', 'Lemuridae'], Procyonid: ['Procyonidae'], Snake: ['Serpentes', 'Elapidae'],
     Lizard: ['Iguanidae', 'Chamaeleonidae'], Crocodilian: ['Crocodylidae', 'Alligatoridae'], Turtle: ['Cheloniidae'],
-    Mustelid: ['Mustelidae'], Camelid: ['Camelidae'], Hippo: ['Hippopotamidae'], Wader: ['Gruidae', 'Phoenicopteridae'],
-    Rodent: ['Castoridae', 'Sciuridae', 'Muridae'], Marsupial: ['Macropodidae', 'Phascolarctidae'], Ratite: ['Struthionidae']
+    Mustelid: ['Mustelidae'], Camelid: ['Camelidae'], Hippo: ['Hippopotamidae', 'Trichechidae'], Wader: ['Gruidae', 'Phoenicopteridae', 'Ciconiidae'],
+    Rodent: ['Castoridae', 'Sciuridae', 'Muridae'], Marsupial: ['Macropodidae', 'Phascolarctidae', 'Dasyuridae'], Ratite: ['Struthionidae']
   };
   GAME_DATA.CLUBS.forEach((c) => { if (c.fam) c.fam = [...new Set(c.fam.flatMap((f) => A[f] || [f]))]; });
 })();
@@ -581,7 +582,7 @@ const SAVE_SYSTEM = {
       v: GAME_DATA.SAVE_VERSION, coins: GAME_DATA.START_COINS, owned: {},
       stats: { played: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, saves: 0, tournaments: 0, trophies: 0, finals: 0, packs: 0, coinsEarned: 0, streak: 0, bestStreak: 0 },
       best: { chem: 0, ovr: 0 }, history: [], settings: { speed: 'normal', tacticsCollapsed: false, positionWarningsCollapsed: true },
-      upgrades: {}, facilities: { pitch: 1, lights: 1, stands: 1, training: 1, medical: 1 },
+      upgrades: {}, facilities: { pitch: 1, lights: 1, stands: 1, training: 1, medical: 1, shop: 1 },
       squad: null, savedSquads: [null, null, null], draftSquad: null, draft: null, tournament: null, starterGiven: false, managerName: 'Wild XI', redeemedCodes: [], exclusiveClaims: [], playDays: [], playedSeen: null
     };
   },
