@@ -1,14 +1,9 @@
-RENDER — DEPLOYMENT UPDATE
+ANIMAL FUT MULTIPLAYER - RENDER DEPLOYMENT
 
-In the existing Render Web Service:
-1. Open Environment.
-2. Add ALLOWED_ORIGINS.
-3. Set it to your exact Netlify origin, e.g. https://your-site-name.netlify.app
-   (no trailing slash). Add a custom domain too if you use one; separate multiple
-   origins with commas.
-4. Save changes and wait for redeploy.
-5. Keep the existing build/start commands unchanged.
+Push the contents of this project to the existing GitHub repository and allow
+the existing Render service to deploy. Keep the current build and start
+commands unchanged.
 
-No persistent disk is required for this version. This update does not add player
-accounts or persistent server-side economy storage. See CHANGELOG_UPDATE_20261117.txt
-for the security limitations and why legacy localStorage balances are not imported.
+Keep ALLOWED_ORIGINS set to the exact production Netlify origin. If you use a
+custom domain, include its exact https:// origin as well. No new environment
+variable or persistent disk is required for this update.

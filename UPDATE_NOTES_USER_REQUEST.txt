@@ -1,0 +1,18 @@
+ANIMAL FUT MULTIPLAYER - UPDATE NOTES
+======================================
+
+- Synced game/engine-src.js and game/animals.js from the updated Netlify game.
+- This keeps the authoritative Render match simulation and animal descriptions
+  aligned with the frontend.
+- No room lifecycle, seat-token, reconnect, rematch or match-result logic was
+  intentionally changed.
+- Existing server test suite: 30 passed, 0 failed.
+- JavaScript syntax checks passed.
+
+Deployment
+----------
+Push the contents of this project to the existing GitHub repository and allow
+Render to deploy as usual. Keep the existing start/build commands unchanged.
+Keep ALLOWED_ORIGINS configured in Render with the exact production Netlify
+origin (and any custom domain origin you use). No new environment variable is
+required for this update.

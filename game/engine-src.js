@@ -1,6 +1,6 @@
 'use strict';
 /* ==========================================================
-   GAME_DATA — sva konfiguracija na jednom mjestu
+   GAME_DATA - sva konfiguracija na jednom mjestu
    ========================================================== */
    
    
@@ -28,12 +28,12 @@ const GAME_DATA = {
   },
   CLASS: { Mammal: '🐾', Insect: '🪳', Bird: '🪶', Reptile: '🦎', Amphibian: '🐸', Arthropod: '🕷️', Fish: '🐟', Mollusk: '🐚', Echinoderm: '⭐', Dinosaur: '🦖' },
   FAMILY: {
-    Feline: 'Mačke', Canine: 'Psi', Raptor: 'Grabljivice', Elephant: 'Slonovi', Rhino: 'Nosorozi',
-    Crocodilian: 'Krokodili', Bovine: 'Goveda', Equine: 'Konji', Cervid: 'Jeleni', Giraffid: 'Žirafe',
+    Feline: 'Cats', Canine: 'Canines', Raptor: 'Raptors', Elephant: 'Elephants', Rhino: 'Rhinos',
+    Crocodilian: 'Crocodilians', Bovine: 'Bovines', Equine: 'Horses', Cervid: 'Deer', Giraffid: 'Giraffes',
     Bear: 'Medvjedi', Primate: 'Primati', Procyonid: 'Rakuni', Swine: 'Svinje', Mustelid: 'Kune',
-    Corvid: 'Vrane', Hippo: 'Nilski konji', Camelid: 'Kamile', Antelope: 'Antilope', Marsupial: 'Tobolčari',
-    Lizard: 'Gušteri', Snake: 'Zmije', Turtle: 'Kornjače', Rodent: 'Glodari', Ratite: 'Trkačice',
-    Wader: 'Močvarice', Kingfisher: 'Vodomari', Cetacean: 'Kitovi i delfini', Cephalopod: 'Glavonošci', Arachnid: 'Pauci'
+    Corvid: 'Crows', Hippo: 'Hippos', Camelid: 'Camels', Antelope: 'Antelopes', Marsupial: 'Marsupials',
+    Lizard: 'Lizards', Snake: 'Snakes', Turtle: 'Turtles', Rodent: 'Rodents', Ratite: 'Ratites',
+    Wader: 'Wading Birds', Kingfisher: 'Kingfishers', Cetacean: 'Whales and Dolphins', Cephalopod: 'Cephalopods', Arachnid: 'Arachnids'
   },
   POSITIONS: ['GK', 'CB', 'LB', 'RB', 'CDM', 'CM', 'CAM', 'LW', 'RW', 'ST'],
   POS_GROUP: { GK: 'GK', CB: 'DEF', LB: 'DEF', RB: 'DEF', CDM: 'MID', CM: 'MID', CAM: 'MID', LW: 'ATT', RW: 'ATT', ST: 'ATT' },
@@ -60,7 +60,7 @@ const GAME_DATA = {
   },
   CHEM_GREEN: 5, CHEM_BLUE: 3,
   TRAITS: {
-    speedster:   { name: 'Speedster',   icon: '⚡', desc: 'Bolji u kontrama i probojima po krilu.' },
+    speedster:   { name: 'Speedster',   icon: '⚡', desc: 'Better on counter-attacks and wing runs.' },
     aerialKing:  { name: 'Aerial King', icon: '🪽', desc: 'Wins more aerial duels and improves headers.' },
     playmaker:   { name: 'Playmaker',   icon: '🎯', desc: 'Creates more chances and provides more assists.' },
     wall:        { name: 'Wall',        icon: '🧱', desc: 'Makes it harder for opponents to create clear chances.' },
@@ -136,7 +136,7 @@ function packArt(pk) {
 }
 const SQUAD_COOLDOWN_MS=10000, SQUAD_COOLDOWN_KEY='wildxi.squadGameFinishedAt';
 function squadCooldownLeft(){try{return Math.max(0,SQUAD_COOLDOWN_MS-(Date.now()-Number(localStorage.getItem(SQUAD_COOLDOWN_KEY)||0)));}catch(_){return 0;}}
-function squadCooldownLabel(){const n=Math.ceil(squadCooldownLeft()/1000);return n>0?`Ponovo možeš igrati za ${n} s`:'⚽ Squad Game — pojedinačni meč';}
+function squadCooldownLabel(){const n=Math.ceil(squadCooldownLeft()/1000);return n>0?`You can play again in ${n}s`:'⚽ Squad Game - single match';}
 
 // formacije: koordinate u % pitcha (x lijevo→desno, y gore=attack → dolje=gol), graf midfield (indeksi)
 GAME_DATA.FORMATIONS = {
@@ -146,7 +146,7 @@ GAME_DATA.FORMATIONS = {
   '442': { id: '442', name: '4-4-2', desc: 'Classic shape with a wide midfield and two strikers.',
     slots: [['GK',50,90],['LB',14,72],['CB',38,76],['CB',62,76],['RB',86,72],['LW',14,48],['CM',38,54],['CM',62,54],['RW',86,48],['ST',36,22],['ST',64,22]],
     links: [[0,2],[0,3],[1,2],[2,3],[3,4],[1,5],[2,6],[3,7],[4,8],[5,6],[6,7],[7,8],[5,9],[6,9],[7,10],[8,10],[9,10]] },
-  '352': { id: '352', name: '3-5-2', desc: 'Tri stopera, krilni bekovi i jaka sredina.',
+  '352': { id: '352', name: '3-5-2', desc: 'Three centre-backs, wing-backs and a strong midfield.',
     slots: [['GK',50,90],['CB',24,76],['CB',50,79],['CB',76,76],['LB',10,52],['CM',32,50],['CDM',50,58],['CM',68,50],['RB',90,52],['ST',36,22],['ST',64,22]],
     links: [[0,1],[0,2],[0,3],[1,2],[2,3],[1,4],[3,8],[1,5],[2,6],[3,7],[4,5],[5,6],[6,7],[7,8],[5,9],[7,10],[9,10],[4,9],[8,10]] },
   '532': { id: '532', name: '5-3-2', desc: 'A solid five-player defense with two strikers.',
@@ -209,20 +209,20 @@ GAME_DATA.FORMATIONS = {
 Object.assign(GAME_DATA.FAMILY, {
   Asteriidae: 'Morske zvijezde', Apterygidae: 'Kivi ptice', Istiophoridae: 'Marlini', Dugongidae: 'Dugongi',
   Accipitridae: 'Orlovi i jastrebovi', Ailuridae: 'Crvene pande', Alcedinidae: 'Vodomari', Alcidae: 'Njorke i tupici',
-  Alligatoridae: 'Aligatori', Araneae: 'Pauci', Balaenopteridae: 'Kitovi brazdaši', Bovidae: 'Goveda i antilope',
+  Alligatoridae: 'Alligators', Araneae: 'Spiders', Balaenopteridae: 'Rorqual Whales', Bovidae: 'Cattle and Antelopes',
   Bradypodidae: 'Ljenjivci', Camelidae: 'Kamile', Canidae: 'Psi', Castoridae: 'Dabrovi', Cervidae: 'Jeleni',
-  Chamaeleonidae: 'Kameleoni', Cheloniidae: 'Morske kornjače', Chiroptera: 'Šišmiši', Crocodylidae: 'Krokodili',
+  Chamaeleonidae: 'Chameleons', Cheloniidae: 'Sea Turtles', Chiroptera: 'Bats', Crocodylidae: 'Crocodiles',
   Dasypodidae: 'Armadilosi', Delphinidae: 'Delfini', Elapidae: 'Kobre', Elephantidae: 'Slonovi', Equidae: 'Konji',
-  Erinaceidae: 'Ježevi', Falconidae: 'Sokolovi', Felidae: 'Mačke', Giraffidae: 'Žirafe', Gruidae: 'Ždralovi',
+  Erinaceidae: 'Hedgehogs', Falconidae: 'Falcons', Felidae: 'Cats', Giraffidae: 'Giraffes', Gruidae: 'Cranes',
   Hippopotamidae: 'Nilski konji', Hominidae: 'Veliki majmuni', Hyaenidae: 'Hijene', Iguanidae: 'Iguane',
-  Lemuridae: 'Lemuri', Leporidae: 'Zečevi', Macropodidae: 'Kenguri', Manidae: 'Pangolini', Mephitidae: 'Tvorovi',
-  Mobulidae: 'Raže', Muridae: 'Miševi', Mustelidae: 'Kune', Myrmecophagidae: 'Mravojedi', Octopodidae: 'Hobotnice',
-  Odobenidae: 'Morževi', Phascolarctidae: 'Koale', Phasianidae: 'Fazani i kokoši', Phoenicopteridae: 'Flamingosi',
-  Primates: 'Primati', Procyonidae: 'Rakuni', Psittaciformes: 'Papige', Ranidae: 'Žabe', Rhinocerotidae: 'Nosorozi',
-  Salamandridae: 'Daždevnjaci', Sciuridae: 'Vjeverice', Selachimorpha: 'Morski psi', Sepiidae: 'Sipe',
+  Lemuridae: 'Lemurs', Leporidae: 'Rabbits and Hares', Macropodidae: 'Kangaroos', Manidae: 'Pangolins', Mephitidae: 'Skunks',
+  Mobulidae: 'Devil Rays', Muridae: 'Mice and Rats', Mustelidae: 'Mustelids', Myrmecophagidae: 'Anteaters', Octopodidae: 'Octopuses',
+  Odobenidae: 'Walruses', Phascolarctidae: 'Koalas', Phasianidae: 'Pheasants and Fowl', Phoenicopteridae: 'Flamingos',
+  Primates: 'Primates', Procyonidae: 'Raccoons', Psittaciformes: 'Parrots', Ranidae: 'True Frogs', Rhinocerotidae: 'Rhinoceroses',
+  Salamandridae: 'Salamanders', Sciuridae: 'Squirrels', Selachimorpha: 'Sharks', Sepiidae: 'Cuttlefish',
   Serpentes: 'Zmije', Spheniscidae: 'Pingvini', Strigidae: 'Sove', Struthionidae: 'Nojevi', Suidae: 'Svinje',
   Tapiridae: 'Tapiri', Trochilidae: 'Kolibri', Ursidae: 'Medvjedi',
-  Ciconiidae: 'Rode', Dasyuridae: 'Tasmanijski đavoli', Trichechidae: 'Lamantini',
+  Ciconiidae: 'Storks', Dasyuridae: 'Tasmanian Devils', Trichechidae: 'Manatees',
   Tyrannosauridae: 'Tiranosauri', Dromaeosauridae: 'Raptori', Ceratopsidae: 'Rogati dinosauri', Spinosauridae: 'Spinosauri',
   Brachiosauridae: 'Dugovrati dinosauri', Stegosauridae: 'Stegosauri', Pteranodontidae: 'Pterosauri'
 });
@@ -241,7 +241,7 @@ Object.assign(GAME_DATA.FAMILY, {
 })();
 
 /* ==========================================================
-   EXCLUSIVE REWARDS — cards that exist only as quest rewards.
+   EXCLUSIVE REWARDS - cards that exist only as quest rewards.
    They are excluded from packs, AI squads and draft offers (unless already owned),
    and are granted exactly once by EXCLUSIVE_SYSTEM.claim().
    Progress reads existing stats, so existing saves keep their earned progress.
@@ -291,10 +291,16 @@ GAME_DATA.EXCLUSIVES = {
 };
 
 // Secret codes for Dinosaur cards (the only way to get one besides the Prehistoric Hit Pack). Code -> card id.
-GAME_DATA.DINO_CODES = {
-  'WILDXI-TREX': 't-rex', 'WILDXI-STEGO': 'stegosaurus', 'WILDXI-RAPTOR': 'velociraptor', 'WILDXI-GALLI': 'gallimimus',
-  'WILDXI-SPINO': 'spinosaurus', 'WILDXI-BRACHIO': 'brachiosaurus', 'WILDXI-PTERA': 'pteranodon'
-};
+const decodeSecretCode = (bytes) => String.fromCharCode(...bytes);
+GAME_DATA.DINO_CODES = Object.fromEntries([
+  [[87,73,76,68,88,73,45,84,82,69,88], 't-rex'],
+  [[87,73,76,68,88,73,45,83,84,69,71,79], 'stegosaurus'],
+  [[87,73,76,68,88,73,45,82,65,80,84,79,82], 'velociraptor'],
+  [[87,73,76,68,88,73,45,71,65,76,76,73], 'gallimimus'],
+  [[87,73,76,68,88,73,45,83,80,73,78,79], 'spinosaurus'],
+  [[87,73,76,68,88,73,45,66,82,65,67,72,73,79], 'brachiosaurus'],
+  [[87,73,76,68,88,73,45,80,84,69,82,65], 'pteranodon']
+].map(([bytes,id]) => [decodeSecretCode(bytes),id]));
 
 /* ==========================================================
    PLAYER_DATABASE
@@ -416,7 +422,7 @@ function weightedPick(items, wf, rnd) {
 const famLabel = (f) => GAME_DATA.FAMILY[f] || f;
 
 /* ==========================================================
-   CHEMISTRY_SYSTEM — ishrana + klasa + porodica, po midfieldma formacije
+   CHEMISTRY_SYSTEM - ishrana + klasa + porodica, po midfieldma formacije
    ========================================================== */
 const CHEMISTRY_SYSTEM = {
   dietPoints(d1, d2) {
@@ -440,7 +446,7 @@ const CHEMISTRY_SYSTEM = {
   },
   explain(p1, p2) {
     const i = this.linkInfo(p1, p2);
-    if (i.dino) return `${p1.name} + ${p2.name}: Dinosaur link — ${i.matched ? 'something in common (+' + i.diet + ' diet, +' + i.cls + ' class, +' + i.fam + ' family), boosted to' : 'nothing in common, minimum link of'} ${i.total} chemistry points.`;
+    if (i.dino) return `${p1.name} + ${p2.name}: Dinosaur link - ${i.matched ? 'something in common (+' + i.diet + ' diet, +' + i.cls + ' class, +' + i.fam + ' family), boosted to' : 'nothing in common, minimum link of'} ${i.total} chemistry points.`;
     return `${p1.name} + ${p2.name}: +${i.diet} for diet, +${i.cls} for animal class, +${i.fam} for family = ${i.total} chemistry points.`;
   },
   // players: niz players po indeksu slota (null = prazno)
@@ -457,7 +463,7 @@ const CHEMISTRY_SYSTEM = {
 };
 
 /* ==========================================================
-   SQUAD_SYSTEM — pozicije, kazne, izgradnja tima i snaga
+   SQUAD_SYSTEM - pozicije, kazne, izgradnja tima i snaga
    ========================================================== */
 const styleIdSafe = (id) => GAME_DATA.STYLES[id] ? id : 'balanced';
 const SQUAD_SYSTEM = {
@@ -573,7 +579,7 @@ const SQUAD_SYSTEM = {
 };
 
 /* ==========================================================
-   SAVE_SYSTEM — localStorage uz verzioniranje i sigurno učitavanje
+   SAVE_SYSTEM - localStorage uz verzioniranje i sigurno učitavanje
    ========================================================== */
 const SAVE_SYSTEM = {
   mem: null,
@@ -682,34 +688,34 @@ function trackPlayDay() {
 const persist = () => { trackPlayDay(); SAVE_SYSTEM.save(STATE); };
 
 /* ==========================================================
-   MATCH_ENGINE — događaji od 1. do 90. minute (+ nadoknada, penali)
+   MATCH_ENGINE - događaji od 1. do 90. minute (+ nadoknada, penali)
    Cijela match se unaprijed generiše iz seed-a; UI je only reprodukuje.
    ========================================================== */
 const MATCH_TEXT = {
-  wing: ['{P} probija {S} stranu i šalje opasan centaršut.', '{P} nadmudruje beka na {S} strani i ubacuje loptu u šesnaesterac.', 'Brza akcija po krilu — {P} diže glavu i centrira!', '{P} stiže do osnovne linije i vraća loptu na peti metar.'],
-  through: ['{P} vidi prostor i šalje loptu iza odbrane!', 'Briljantno dodavanje igrača {P} presijeca liniju odbrane.', '{P} i {A} razmjenjuju brza dodavanja pred kaznenim prostorom.', '{P} diriguje napadom i traži rupu u odbrani kluba {O}.'],
-  long: ['{A} dobija loptu 25 metara od gola i odlučuje da proba iz daljine!', '{A} nema prostora za dodavanje i pokušava udarac sa distance.', 'Lopta se odbija do {A} na ivici kaznenog prostora!'],
-  counter: ['Brza kontra! {P} prebacuje loptu na {A} u prazan prostor.', '{P} diže glavu i šalje dugu loptu za {A} — kontra!', 'Odbrana kluba {O} je otvorena — {A} jurca prema golu!'],
-  intercept: ['{I} presijeca dodavanje i započinje brzu kontru!', '{I} čita igru savršeno, hvata loptu i kreće u kontru!'],
-  defClear: ['{D} čisti loptu iz opasne zone.', '{D} savršeno presijeca centaršut.', 'Odbrana kluba {O} stoji čvrsto — {D} gasi opasnost.', '{D} u zadnji čas stiže do lopte i izbija je.'],
-  corner: ['KORNER! {T} imaju priliku iz prekida.', '{D} izbija loptu u korner. {T} će izvoditi korner.'],
-  cornerTake: ['{P} izvodi korner i ubacuje loptu u gužvu.', '{P} diže loptu na korneru — {A} se izdvaja u skoku!'],
-  cornerNo: ['Korner izveden na prvu stativu, ali {D} je prvi na lopti.', 'Korner prelazi sve igrače — {D} izbija loptu iz opasne zone.'],
-  goalHead: ['GOL! {A} glavom šalje loptu u mrežu nakon preciznog centaršuta {P}!', 'GOL! {A} skače najviše u kaznenom prostoru i glavom matira {G}!'],
-  goalThrough: ['GOL! {A} ostaje sam pred {G} i hladnokrvno ga savladava nakon dodavanja {P}!', 'GOL! {A} lukom prebacuje {G} i mreža se trese!'],
-  goalLong: ['GOL! {A} puca sa distance — {G} ne može da dohvati loptu!', 'GOL! Raketa iz daljine! {A} pogađa gornji ugao!'],
-  goalCounter: ['GOL! Kontra završena! {A} savlađuje {G} nakon brze akcije {P}!', 'GOL! {A} u trku šutira i loptom pogađa mrežu!'],
-  goalCorner: ['GOL! {A} glavom na korneru, mreža se trese!', 'GOL! Nakon korner-a {A} je prvi na lopti i pogađa!'],
-  save: ['{G} sjajno brani udarac igrača {A}!', '{A} puca prema golu, ali {G} reaguje refleksno!', '{G} se baca u donji ugao i izbija šut igrača {A}!'],
-  miss: ['{A} šutira — preko okvira gola.', '{A} promašuje za dlaku, lopta ide pored stative.', '{A} nema sreće, lopta ide pored gola.'],
-  post: ['{A} pogađa stativu! Nevjerovatno!', '{A} gađa prečku! Lopta se vraća u igru.'],
-  block: ['{D} blokira udarac igrača {A}!', '{D} baca se pod šut igrača {A} i spašava situaciju.'],
-  foul: ['{F} ruši {V} — prekršaj za {T}.', 'Prekršaj! {F} kasno ulazi u duel sa {V}.'],
-  yellow: ['Žuti karton za {F} zbog grubog starta.', 'Sudija vadi žuti karton igraču {F}.'],
-  penalty: ['PENAL za {T}! {F} ruši {V} u kaznenom prostoru!', 'Sudija pokazuje na bijelu tačku! {F} je nedozvoljeno zaustavio {V}.'],
-  penGoal: ['GOL! {A} sigurno izvodi jedanaesterac!', 'GOL! {A} šalje {G} na pogrešnu stranu!'],
-  penSave: ['{G} brani penal igrača {A}!'],
-  penMiss: ['{A} puca preko gola — penal promašen!']
+  wing: ['{P} breaks down the {S} flank and sends in a dangerous cross.', '{P} beats the full-back on the {S} flank and delivers into the box.', 'A quick move down the wing - {P} looks up and crosses!', '{P} reaches the byline and cuts the ball back into the six-yard box.'],
+  through: ['{P} spots the space and threads a ball behind the defence!', 'A brilliant pass from {P} splits the defensive line.', '{P} and {A} exchange quick passes just outside the box.', '{P} directs the attack and searches for a gap in {O} defence.'],
+  long: [' {A} receives the ball 25 metres out and tries a long-range shot!', '{A} has no passing option and tries a shot from distance.', 'The ball breaks to {A} on the edge of the box!'],
+  counter: ['Quick counter! {P} sends the ball into space for {A}.', '{P} looks up and launches a long ball for {A} - counter-attack!', '{O} defence is exposed - {A} races towards goal!'],
+  intercept: ['{I} intercepts the pass and launches a quick counter!', '{I} reads the play perfectly, wins the ball and starts a counter!'],
+  defClear: ['{D} clears the ball from danger.', '{D} cuts out the cross perfectly.', 'The {O} defence holds firm - {D} snuffs out the danger.', '{D} gets to the ball just in time and clears it.'],
+  corner: ['{T} have a corner opportunity.', '{D} clears the ball behind for a corner. {T} will take it.'],
+  cornerTake: ['{P} takes the corner and sends the ball into the crowd.', '{P} swings in the corner - {A} rises above the defence!'],
+  cornerNo: ['The corner reaches the near post, but {D} gets there first.', 'The corner clears everyone - {D} clears the danger.'],
+  goalHead: ['{A} heads home a pinpoint cross from {P}.', '{A} rises highest in the box and beats {G} with a header.'],
+  goalThrough: ['{A} is through on {G} and calmly finishes after a pass from {P}.', '{A} chips {G} and finds the net.'],
+  goalLong: ['{A} fires from distance - {G} cannot reach it.', 'A rocket from distance! {A} finds the top corner.'],
+  goalCounter: ['A quick counter-attack ends with {A} finishing after a pass from {P}.', '{A} shoots on the run and finds the net.'],
+  goalCorner: ['{A} heads in from the corner.', '{A} reaches the corner first and scores.'],
+  save: ['{G} makes a superb save from {A}!', '{A} shoots, but {G} reacts instinctively!', '{G} dives low and pushes away {A} shot!'],
+  miss: ['{A} shoots - over the bar.', '{A} misses by inches, sending the ball wide.', '{A} is unlucky as the ball drifts wide.'],
+  post: ['{A} hits the post! Unbelievable!', '{A} hits the crossbar! The ball rebounds into play.'],
+  block: ['{D} blocks {A} shot!', '{D} throws themselves in front of {A} shot and saves the day.'],
+  foul: ['{F} brings down {V} - free kick to {T}.', 'Foul! {F} arrives late in the challenge on {V}.'],
+  yellow: ['Yellow card for {F} for a reckless challenge.', 'The referee shows {F} a yellow card.'],
+  penalty: ['The referee awards {T} a penalty after {F} brings down {V} in the box.', 'The referee points to the spot! {F} illegally stops {V}.'],
+  penGoal: ['{A} converts the penalty with confidence.', '{A} sends {G} the wrong way from the spot.'],
+  penSave: ['{G} saves the penalty from {A}!'],
+  penMiss: ['{A} sends the penalty over the bar!']
 };
 
 const MATCH_ENGINE = (function () {
@@ -907,8 +913,8 @@ const MATCH_ENGINE = (function () {
     // --- glavna petlja
     let busyUntil = 0, lastDone = false;
     for (let i = 0; i <= lastIdx; i++) {
-      if (i === 0) ev(0, -1, 'sys', 'Sudija označava početak meča! ' + T[0].name + ' protiv ' + T[1].name + '.', 50);
-      if (i === firstEnd + 1) ev(i, -1, 'sys', 'Počinje drugo poluvrijeme.', 50);
+      if (i === 0) ev(0, -1, 'sys', 'The referee signals kick-off! ' + T[0].name + ' protiv ' + T[1].name + '.', 50);
+      if (i === firstEnd + 1) ev(i, -1, 'sys', 'The second half begins.', 50);
       const pA = T[0].ctrl / (T[0].ctrl + T[1].ctrl);
       const holder = rnd() < pA ? 0 : 1;
       stats.poss[holder]++;
@@ -918,7 +924,7 @@ const MATCH_ENGINE = (function () {
         if (ticks[i].l === "89'" && !lastDone) {
           lastDone = true;
           const side = score[0] < score[1] ? 0 : score[1] < score[0] ? 1 : (rnd() < pA ? 0 : 1);
-          used = runAttack(i, side, null, 'Posljednji napad!');
+          used = runAttack(i, side, null, 'Final attack!');
         } else if (rnd() < .06 * STY(1 - holder).counter) {
           used = runAttack(i, 1 - holder, 'counter', null);
         } else if (rnd() < .62) {
@@ -928,22 +934,22 @@ const MATCH_ENGINE = (function () {
         }
         busyUntil = Math.min(i + used, halfEnd(i) + 1);
       }
-      if (i === firstEnd) ev(i, -1, 'sys', `Sudija označava kraj prvog poluvremena. ${T[0].name} ${score[0]}:${score[1]} ${T[1].name}`, 50);
+      if (i === firstEnd) ev(i, -1, 'sys', `The referee signals half-time. ${T[0].name} ${score[0]}:${score[1]} ${T[1].name}`, 50);
     }
-    ev(lastIdx, -1, 'sys', `Kraj meča! ${T[0].name} ${score[0]}:${score[1]} ${T[1].name}`, 50);
+    ev(lastIdx, -1, 'sys', `Full-time! ${T[0].name} ${score[0]}:${score[1]} ${T[1].name}`, 50);
 
     // --- penali ako je neriješeno (nokaut)
     let pens = null, winner = score[0] > score[1] ? 0 : score[1] > score[0] ? 1 : -1;
     if (winner === -1) {
       const pe = [0, 0], taken = [0, 0];
-      ev(lastIdx, -1, 'sys', 'Neriješeno! Slijedi raspucavanje jedanaesteraca.', 50);
+      ev(lastIdx, -1, 'sys', 'The match is level! A penalty shootout follows.', 50);
       const takers = [0, 1].map((s) => S[s].filter((x) => x.pos !== 'GK').sort((a, b) => b.eff.sho - a.eff.sho));
       const kick = (s) => {
         const tk = takers[s][taken[s] % takers[s].length]; taken[s]++;
         const p = clamp(.76 + (tk.eff.sho - gkEff(1 - s)) / 350, .55, .9);
         const ok = rnd() < p;
         if (ok) pe[s]++;
-        const e = { t: lastIdx, l: 'PEN', team: s, kind: ok ? 'goal' : 'miss', text: (ok ? 'GOL! ' : 'Promašaj! ') + tk.p.name + (ok ? ' pogađa' : ' ne uspijeva') + ` — raspucavanje ${pe[0]}:${pe[1]}`, score: score.slice(), st: snap(), ball: s === 0 ? 99 : 1, pens: pe.slice() };
+        const e = { t: lastIdx, l: 'PEN', team: s, kind: ok ? 'goal' : 'miss', text: (ok ? 'GOL! ' : 'Missed! ') + tk.p.name + (ok ? ' scores' : ' misses') + ` - penalty shootout ${pe[0]}:${pe[1]}`, score: score.slice(), st: snap(), ball: s === 0 ? 99 : 1, pens: pe.slice() };
         if (ok) { e.scorer = tk.p.name; e.emoji = tk.p.emoji; e.penShootout = true; }
         events.push(e);
       };
@@ -955,7 +961,7 @@ const MATCH_ENGINE = (function () {
       while (pe[0] === pe[1] && guard++ < 25) { kick(0); kick(1); }
       if (pe[0] === pe[1]) pe[rnd() < .5 ? 0 : 1]++;
       pens = pe; winner = pe[0] > pe[1] ? 0 : 1;
-      events.push({ t: lastIdx, l: 'PEN', team: -1, kind: 'sys', text: `${T[winner].name} pobjeđuje na penale ${pe[0]}:${pe[1]}!`, score: score.slice(), st: snap(), ball: 50, pens: pe.slice() });
+      events.push({ t: lastIdx, l: 'PEN', team: -1, kind: 'sys', text: `${T[winner].name} wins the penalty shootout ${pe[0]}:${pe[1]}!`, score: score.slice(), st: snap(), ball: 50, pens: pe.slice() });
     }
     return { events, stats, score, pens, winner, goals, seed };
   }
