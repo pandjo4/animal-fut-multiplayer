@@ -1,0 +1,14 @@
+RENDER — DEPLOYMENT UPDATE
+
+In the existing Render Web Service:
+1. Open Environment.
+2. Add ALLOWED_ORIGINS.
+3. Set it to your exact Netlify origin, e.g. https://your-site-name.netlify.app
+   (no trailing slash). Add a custom domain too if you use one; separate multiple
+   origins with commas.
+4. Save changes and wait for redeploy.
+5. Keep the existing build/start commands unchanged.
+
+No persistent disk is required for this version. This update does not add player
+accounts or persistent server-side economy storage. See CHANGELOG_UPDATE_20261117.txt
+for the security limitations and why legacy localStorage balances are not imported.

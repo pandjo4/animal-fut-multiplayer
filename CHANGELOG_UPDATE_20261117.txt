@@ -1,0 +1,39 @@
+ANIMAL FUT MULTIPLAYER — UPDATE 2026-11-17
+============================================
+
+Security change
+---------------
+- Production CORS now fails closed when ALLOWED_ORIGINS is missing. Previously an
+  unset variable allowed any website origin. Configure ALLOWED_ORIGINS in Render.
+
+Preserved
+---------
+- Socket.IO room lifecycle, seat-bound room tokens, team validation, match simulation,
+  event streaming, reconnect/resume, rematch and existing room cleanup behavior.
+
+Important limitations
+---------------------
+- This backend still does NOT own the single-player coin balance, pack purchases,
+  promo-code redemptions, collection or upgrade progression.
+- Existing multiplayer validation confirms known animal IDs, formation, team size,
+  duplicate IDs and upgrade bounds, but cannot prove collection ownership because
+  no persistent player profile/account system currently exists.
+- Room tokens are temporary room-seat credentials, not permanent player accounts.
+- No persistent disk or JSON player database is added in this update. Adding a secure
+  economy requires an explicit legacy-save linking/migration design: the server cannot
+  safely trust the coins/collection in an arbitrary browser localStorage payload.
+  Blindly importing those values would let a player mint coins at first login.
+
+Render deployment
+-----------------
+1. Open the existing Render Web Service.
+2. Open Environment.
+3. Add ALLOWED_ORIGINS with your exact production Netlify origin, for example:
+   https://your-site-name.netlify.app
+   Do not include a trailing slash. For multiple allowed origins, separate them with commas.
+4. Save changes and allow Render to redeploy.
+5. Keep the existing Build Command and Start Command unchanged.
+6. Do not create a persistent disk for this version; no persistent player data is stored.
+
+If you use a Netlify custom domain, include that exact https:// origin as well.
+Preview deploys are not allowed unless explicitly added (wildcard syntax is supported).

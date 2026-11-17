@@ -17,7 +17,7 @@ const regexes = patterns.map(toRegex);
 const allowLocal = process.env.NODE_ENV !== 'production' || process.env.ALLOW_LOCALHOST === 'true';
 function isAllowed(origin) {
   if (!origin) return true; // non-browser clients send no Origin
-  if (!patterns.length) return true; // not configured yet -> open (see warning below)
+  if (!patterns.length) return process.env.NODE_ENV !== 'production'; // production is fail-closed until ALLOWED_ORIGINS is configured
   if (allowLocal && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) return true;
   return regexes.some((r) => r.test(origin));
 }
