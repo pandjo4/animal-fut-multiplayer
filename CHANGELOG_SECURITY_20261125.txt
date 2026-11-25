@@ -1,0 +1,8 @@
+ANIMAL FUT MULTIPLAYER — SECURITY UPDATE — 2026-11-25
+
+- Added 24-hour server-side session expiry and token rotation on resume.
+- Added shared IP request, room-create, wrong-room-code and active-room limits.
+- Expanded crest shape validation to 0–24 and restricted crest colors.
+- Added regression tests for token expiry/rotation, IP controls and all crest shapes.
+- `npm test`: 35 passed, 0 failed.
+- See SECURITY_UPDATE_20261125.md for deployment notes and remaining account/database requirements.

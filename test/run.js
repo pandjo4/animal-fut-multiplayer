@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('assert');
 const { FakeIO } = require('./fake-io');
-const { createService } = require('../lib/rooms');
+const { createService, cleanCrest } = require('../lib/rooms');
 const engine = require('../lib/engine');
 
 const E = engine.load();
@@ -47,6 +47,34 @@ const ready = (A, B) => { A.call('ready:set', { ready: true }); B.call('ready:se
     assert(!JSON.stringify(r.state).includes(r.token), 'token must not leak in state');
   });
 
+  await test('crest validator accepts all 25 shapes and rejects unsafe colours', async () => {
+    for (let shape=0; shape<=24; shape++) assert.strictEqual(cleanCrest({shape,primary:'#abc'}).shape, shape);
+    assert.strictEqual(cleanCrest({shape:24,primary:'url(javascript:alert(1))'}).primary, '#d9a441');
+    assert.strictEqual(cleanCrest({shape:99}).shape, 24);
+  });
+
+  await test('IP room-creation limit is shared across separate sockets', async (io) => {
+    const A=io.connect('203.0.113.44'), B=io.connect('203.0.113.44');
+    assert(A.call('room:create',{name:'A'}).ok);
+    const blocked=B.call('room:create',{name:'B'});
+    assert.strictEqual(blocked.code,'RATE_LIMITED');
+  }, {IP_CREATE_MAX:1});
+
+  await test('session token rotates on resume; old token cannot resume again', async (io) => {
+    const A=io.connect(), c=A.call('room:create',{name:'A'});
+    const B=io.connect(), r=B.call('room:resume',{code:c.code,token:c.token});
+    assert(r.ok && r.token && r.token!==c.token);
+    const X=io.connect();
+    assert.notStrictEqual(X.call('room:resume',{code:c.code,token:c.token}).ok,true);
+  });
+
+  await test('expired session is revoked server-side', async (io) => {
+    const A=io.connect(), c=A.call('room:create',{name:'A'});
+    await sleep(5);
+    const B=io.connect(), r=B.call('room:resume',{code:c.code,token:c.token});
+    assert.strictEqual(r.code,'SESSION_EXPIRED');
+  }, {SESSION_TTL_MS:1});
+
   await test('second player joins with correct code (lowercase/spaces tolerated); host is notified', async (io) => {
     const A = io.connect(), B = io.connect(); const c = A.call('room:create', { name: 'Alice' });
     const j = B.call('room:join', { code: ' ' + c.code.toLowerCase() + ' ', name: 'Bob' });
@@ -66,6 +94,13 @@ const ready = (A, B) => { A.call('ready:set', { ready: true }); B.call('ready:se
     for (let i = 0; i < 12; i++) last = B.call('room:join', { code: 'ZZZZ' + (i % 9 + 2) });
     assert.strictEqual(last.code, 'RATE_LIMITED');
   });
+
+  await test('wrong room codes are throttled across separate sockets by IP', async (io) => {
+    const A=io.connect('198.51.100.22'), B=io.connect('198.51.100.22');
+    assert.strictEqual(A.call('room:join',{code:'ZZZZZ'}).code,'ROOM_NOT_FOUND');
+    assert.strictEqual(A.call('room:join',{code:'YYYYY'}).code,'ROOM_NOT_FOUND');
+    assert.strictEqual(B.call('room:join',{code:'XXXXX'}).code,'RATE_LIMITED');
+  }, {IP_JOIN_FAIL_MAX:2});
 
   await test('third player cannot join a full room', async (io) => {
     const { code } = await lobby(io); const C = io.connect();

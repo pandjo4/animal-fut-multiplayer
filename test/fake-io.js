@@ -8,9 +8,9 @@ class FakeIO {
       for (const id of ids) { const c = this.byId.get(id); if (c) c._deliver(ev, data); }
     } };
   }
-  connect() {
+  connect(ip) {
     const io = this, id = 'sock' + (++this.n);
-    const server = { id, data: {}, handlers: {}, alive: true,
+    const server = { id, data: {}, handlers: {}, alive: true, handshake: { headers: ip ? {'x-forwarded-for': ip} : {}, address: ip || '127.0.0.1' },
       on(ev, fn) { this.handlers[ev] = fn; },
       join(r) { if (!io.members.has(r)) io.members.set(r, new Set()); io.members.get(r).add(id); },
       leave(r) { if (io.members.has(r)) io.members.get(r).delete(id); },
