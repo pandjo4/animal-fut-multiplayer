@@ -4,6 +4,10 @@ const express = require('express');
 const { Server } = require('socket.io');
 const { createService } = require('./lib/rooms');
 const engine = require('./lib/engine');
+const { openStore } = require('./lib/db/store');
+const { createService: createAccounts } = require('./lib/service');
+const { createApi } = require('./lib/api');
+const promoSeed = require('./lib/promo-seed');
 
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -27,6 +31,7 @@ else console.log('[cors] allowed origins:', patterns.join(', '));
 engine.load(); // fail fast if game files are missing/broken
 const app = express();
 app.disable('x-powered-by');
+app.set('trust proxy', 1); // Render terminates TLS in front of the app
 const server = http.createServer(app);
 const io = new Server(server, {
   serveClient: false,
@@ -36,7 +41,21 @@ const io = new Server(server, {
   pingTimeout: 10000,
   maxHttpBufferSize: 100 * 1024
 });
-const service = createService(io);
+
+/* ---- database + accounts ---- */
+const databaseUrl = process.env.DATABASE_URL || '';
+if (!databaseUrl && process.env.NODE_ENV === 'production' && process.env.ALLOW_SQLITE !== 'true') {
+  console.error('FATAL: DATABASE_URL is not set. Set it to your Supabase Postgres connection string (Render > Environment).');
+  process.exit(1);
+}
+const store = openStore({ databaseUrl, sqliteFile: process.env.SQLITE_FILE || (databaseUrl ? '' : require('path').join(__dirname, 'data-dev.sqlite')) });
+const accounts = createAccounts(store);
+const ready = store.migrate().then(() => accounts.seedPromos(promoSeed.load())).then(() => console.log('[db] ready (' + store.kind + ')'));
+ready.catch((e) => { console.error('FATAL: database setup failed:', e); process.exit(1); });
+setInterval(() => ready.then(() => accounts.cleanup()).catch((e) => console.error('[cleanup]', e)), 3600e3).unref();
+app.use('/api', createApi(accounts, { isAllowedOrigin: isAllowed }));
+
+const service = createService(io, { accounts, requireAuth: process.env.REQUIRE_AUTH !== 'false' });
 service.start();
 io.on('connection', (socket) => service.attach(socket));
 
@@ -49,7 +68,7 @@ app.get('/', (req, res) => res.type('text/plain').send('Animal FUT multiplayer s
 
 server.listen(PORT, () => console.log('Multiplayer server listening on port ' + PORT));
 
-function stop() { service.shutdown(); io.close(() => process.exit(0)); setTimeout(() => process.exit(0), 3000).unref(); }
+function stop() { service.shutdown(); store.close().catch(() => {}); io.close(() => process.exit(0)); setTimeout(() => process.exit(0), 3000).unref(); }
 process.on('SIGTERM', stop);
 process.on('SIGINT', stop);
 process.on('unhandledRejection', (e) => console.error('[unhandledRejection]', e));

@@ -1,17 +1,21 @@
 {
   "name": "animal-fut-multiplayer",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Authoritative 1v1 multiplayer server for Animal FUT Draft / Anomalia Kingdom",
   "main": "server.js",
   "private": true,
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server.js",
-    "test": "node test/run.js",
-    "sync-engine": "node tools/sync-engine.js ../frontend"
+    "test": "node test/run.js && node test/accounts.test.js",
+    "sync-engine": "node tools/sync-engine.js ../frontend",
+    "test:client": "CLIENT_DIR=\"../actual game\" node test/client.smoke.js"
   },
   "dependencies": {
     "express": "^4.21.2",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "pg": "^8.13.1"
   }
 }

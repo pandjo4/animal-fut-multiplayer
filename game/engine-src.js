@@ -109,7 +109,7 @@ const GAME_DATA = {
 };
 
 const ASSETS = {
-  animal: id => `images/animal/${(PLAYER_BY_ID[id] && PLAYER_BY_ID[id].id) || id}.png`,
+  animal: id => `images/animal/${(PLAYER_BY_ID[id] && PLAYER_BY_ID[id].id) || id}.webp`,
   pack: { basic:'images/packs/pack-basic.png', rare:'images/packs/pack-premium.png', epic:'images/packs/pack-legendary.png', elite:'images/packs/pack-elite.png' },
   audio: { matchStart:'audio/match-start.mp3', matchEnd:'audio/match-end.mp3', music:'audio/background-music.mp3' }
 };
@@ -128,11 +128,11 @@ const MEDIA = {
   play(k){if(!this.settings.effects||!this.effects[k])return;try{const a=this.effects[k];a.pause();a.currentTime=0;const p=a.play();if(p&&p.catch)p.catch(()=>{});}catch(_){}}
 };
 function animalArt(p, cls='') {
-  return `<span class="animal-art ${cls}"><img src="${ASSETS.animal(p.id)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span>${p.emoji}</span></span>`;
+  return `<span class="animal-art ${cls}"><img src="${ASSETS.animal(p.id)}" alt="" loading="lazy" onerror="if(!this.dataset.pngFallback){this.dataset.pngFallback='1';this.src=this.src.replace(/\.webp(?:\?.*)?$/i,'.png')}else{this.style.display='none';this.nextElementSibling.style.display='inline'}"><span>${p.emoji}</span></span>`;
 }
 function packArt(pk) {
   const src=ASSETS.pack[pk.id]||`images/packs/pack-${pk.id}.png`;
-  return `<span class="pack-art-img"><img src="${src}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span>${pk.icon}</span></span>`;
+  return `<span class="pack-art-img"><img src="${src}" alt="" onerror="if(!this.dataset.pngFallback){this.dataset.pngFallback='1';this.src=this.src.replace(/\.webp(?:\?.*)?$/i,'.png')}else{this.style.display='none';this.nextElementSibling.style.display='inline'}"><span>${pk.icon}</span></span>`;
 }
 const SQUAD_COOLDOWN_MS=10000, SQUAD_COOLDOWN_KEY='wildxi.squadGameFinishedAt';
 function squadCooldownLeft(){try{return Math.max(0,SQUAD_COOLDOWN_MS-(Date.now()-Number(localStorage.getItem(SQUAD_COOLDOWN_KEY)||0)));}catch(_){return 0;}}
@@ -264,9 +264,9 @@ GAME_DATA.EXCLUSIVES = {
       { id: 'played', icon: '⚽', label: 'Play 100 matches', need: 100, get: () => (STATE.stats.played || 0) }
     ]
   },
-  // Dostupan samo preko koda (WILDXI-ADMIN1); ne pojavljuje se u misijama ni u paketima.
+  // Dostupan samo preko promo koda (serverski); ne pojavljuje se u misijama ni u paketima.
   'crni-marlin': { codeOnly: true, quest: 'Secret code', requirements: [] },
-    // Dostupan samo preko koda (WILDXI-ADMIN2); ne pojavljuje se u misijama ni u paketima.
+    // Dostupan samo preko promo koda (serverski); ne pojavljuje se u misijama ni u paketima.
   'skakavac': { codeOnly: true, quest: 'Secret code', requirements: [] },
   dugong: {
     quest: 'Loyal fan',
@@ -290,17 +290,8 @@ GAME_DATA.EXCLUSIVES = {
   }
 };
 
-// Secret codes for Dinosaur cards (the only way to get one besides the Prehistoric Hit Pack). Code -> card id.
-const decodeSecretCode = (bytes) => String.fromCharCode(...bytes);
-GAME_DATA.DINO_CODES = Object.fromEntries([
-  [[87,73,76,68,88,73,45,84,82,69,88], 't-rex'],
-  [[87,73,76,68,88,73,45,83,84,69,71,79], 'stegosaurus'],
-  [[87,73,76,68,88,73,45,82,65,80,84,79,82], 'velociraptor'],
-  [[87,73,76,68,88,73,45,71,65,76,76,73], 'gallimimus'],
-  [[87,73,76,68,88,73,45,83,80,73,78,79], 'spinosaurus'],
-  [[87,73,76,68,88,73,45,66,82,65,67,72,73,79], 'brachiosaurus'],
-  [[87,73,76,68,88,73,45,80,84,69,82,65], 'pteranodon']
-].map(([bytes,id]) => [decodeSecretCode(bytes),id]));
+// Promo codes live ONLY on the server (POST /api/promo/redeem). Nothing about them ships in this file.
+GAME_DATA.DINO_CODES = {};
 
 /* ==========================================================
    PLAYER_DATABASE
@@ -610,7 +601,15 @@ const SAVE_SYSTEM = {
     }
     if (d.stats && typeof d.stats === 'object') for (const k in out.stats) if (Number.isFinite(d.stats[k])) out.stats[k] = d.stats[k];
     if (d.best && typeof d.best === 'object') { out.best.chem = Number(d.best.chem) || 0; out.best.ovr = Number(d.best.ovr) || 0; }
-    if (Array.isArray(d.history)) out.history = d.history.filter((h) => h && typeof h === 'object').slice(0, 30);
+    if (Array.isArray(d.history)) out.history = d.history.filter((h) => h && typeof h === 'object').slice(0, 30).map(h => ({
+      opp: String(h.opp || 'Opponent').replace(/[\u0000-\u001f\u007f]/g,'').slice(0,40),
+      icon: String(h.icon || '🐾').replace(/[\u0000-\u001f\u007f<>]/g,'').slice(0,8),
+      gf: Number.isFinite(Number(h.gf)) ? Math.max(0,Math.min(99,Math.floor(Number(h.gf)))) : 0,
+      ga: Number.isFinite(Number(h.ga)) ? Math.max(0,Math.min(99,Math.floor(Number(h.ga)))) : 0,
+      round: String(h.round || '').replace(/[\u0000-\u001f\u007f]/g,'').slice(0,60),
+      r: ['W','D','L'].includes(h.r) ? h.r : 'D', draw: h.draw===true,
+      pens: Array.isArray(h.pens)&&h.pens.length===2&&h.pens.every(x=>Number.isInteger(x)&&x>=0&&x<=30)?h.pens:null
+    }));
     if (d.settings && ['normal', 'fast'].includes(d.settings.speed)) out.settings.speed = d.settings.speed;
     if (d.settings && typeof d.settings.tacticsCollapsed === 'boolean') out.settings.tacticsCollapsed = d.settings.tacticsCollapsed;
     if (d.settings && typeof d.settings.positionWarningsCollapsed === 'boolean') out.settings.positionWarningsCollapsed = d.settings.positionWarningsCollapsed;
@@ -618,12 +617,13 @@ const SAVE_SYSTEM = {
     if (d.facilities && typeof d.facilities === 'object') for (const id of Object.keys(out.facilities)) { const level = Number(d.facilities[id]); if (Number.isInteger(level) && level >= 1 && level <= 10) out.facilities[id] = level; }
     if (typeof d.managerName === 'string') out.managerName = d.managerName.trim().slice(0, 18) || 'Wild XI';
     if (Array.isArray(d.redeemedCodes)) out.redeemedCodes = [...new Set(d.redeemedCodes.filter((x) => typeof x === 'string').map((x) => x.toUpperCase().slice(0, 64)))];
-    // Exclusive reward cards: claim record is kept as a whitelist of known ids. A claimed card is always
-    // owned exactly once (never duplicated by save/load) and an owned exclusive always counts as claimed.
-    if (Array.isArray(d.exclusiveClaims)) out.exclusiveClaims = [...new Set(d.exclusiveClaims.filter((x) => typeof x === 'string' && GAME_DATA.EXCLUSIVES[x]))];
+    // Local saves are user-editable. Never convert exclusiveClaims into ownership:
+    // only an already-present owned entry survives local normalization. A true server-side
+    // ownership ledger requires authenticated persistent accounts (not available in this build).
+    if (Array.isArray(d.exclusiveClaims)) out.exclusiveClaims = [...new Set(d.exclusiveClaims.filter((x) => typeof x === 'string' && GAME_DATA.EXCLUSIVES[x] && out.owned[x] > 0))];
     Object.keys(GAME_DATA.EXCLUSIVES).forEach((id) => {
       if (out.owned[id] > 0) { out.owned[id] = 1; if (!out.exclusiveClaims.includes(id)) out.exclusiveClaims.push(id); }
-      else if (out.exclusiveClaims.includes(id) && PLAYER_BY_ID[id]) out.owned[id] = 1;
+      else out.exclusiveClaims = out.exclusiveClaims.filter(x => x !== id);
     });
     const okSquad = (x) => x && GAME_DATA.FORMATIONS[x.formation] && Array.isArray(x.slots) && x.slots.length === 11 && x.slots.every((y) => y === null || PLAYER_BY_ID[y]);
     const cp = (x) => ({ formation: x.formation, slots: canonicalSlots(x.slots), style: GAME_DATA.STYLES[x.style] ? x.style : 'balanced' });
@@ -685,7 +685,7 @@ function trackPlayDay() {
     STATE.playedSeen = played;
   }
 }
-const persist = () => { trackPlayDay(); SAVE_SYSTEM.save(STATE); };
+const persist = () => { trackPlayDay(); SAVE_SYSTEM.save(STATE); if (window.WILDXI_SYNC) window.WILDXI_SYNC.schedulePrefs(); };
 
 /* ==========================================================
    MATCH_ENGINE - događaji od 1. do 90. minute (+ nadoknada, penali)
